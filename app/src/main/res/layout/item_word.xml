@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="60dp"
-              android:background="@drawable/word_item_bg"
-              android:orientation="horizontal"
-              android:padding="5dp">
-
-    <ImageView
-        android:id="@+id/iv_word"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="@string/iv_word"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/wordlist_item_img"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/word_item_bg"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
     <TextView
-        android:id="@+id/tv_item_word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:gravity="center_vertical"
-        android:text="hello"
-        android:textColor="@color/color_word_list"
-        android:textSize="25sp"/>
-</LinearLayout>
+            android:id="@+id/tv_item_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="hello"
+            android:textColor="@color/color_word_list"
+            android:textSize="20sp"
+            android:layout_alignParentTop="true" />
+    <TextView
+            android:id="@+id/tv_trans"
+            android:text="v. 煽动，教唆，教唆某人犯罪"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:layout_alignParentBottom="true"
+    />
+</RelativeLayout>
