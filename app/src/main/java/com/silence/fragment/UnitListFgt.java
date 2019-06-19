@@ -3,6 +3,7 @@ package com.silence.fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;

@@ -47,11 +47,13 @@ public class WordAdapter extends BaseAdapter implements Scrollable {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_word, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.tvWord = (TextView) convertView.findViewById(R.id.tv_item_word);
+            viewHolder.tvWordTrans = (TextView)convertView.findViewById(R.id.tv_item_word_trans);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tvWord.setText(mWordList.get(position).getKey());
+        viewHolder.tvWordTrans.setText(mWordList.get(position).getTrans());
         return convertView;
     }
 
@@ -67,5 +69,6 @@ public class WordAdapter extends BaseAdapter implements Scrollable {
 
     static class ViewHolder {
         TextView tvWord;
+        TextView tvWordTrans;
     }
 }
