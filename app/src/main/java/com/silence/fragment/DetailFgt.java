@@ -16,7 +16,7 @@ import com.silence.utils.Const;
 import com.silence.word.R;
 
 /**
- * Created by Silence on 2016/2/9 0009.
+ * Created by Autumn on 2019/6/9 0009.
  */
 public class DetailFgt extends Fragment {
     private onSpeechListener mOnSpeechListener;

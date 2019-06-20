@@ -14,7 +14,7 @@ import com.silence.word.R;
 import java.util.List;
 
 /**
- * Created by Silence on 2016/3/18 0018.
+ * Created by Autumn on 2016/3/18 0018.
  */
 public class WordAdapter extends BaseAdapter implements Scrollable {
     private Context mContext;

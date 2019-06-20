@@ -12,7 +12,7 @@ import com.silence.pojo.Word;
 import java.util.List;
 
 /**
- * Created by Silence on 2016/2/9 0009.
+ * Created by Autumn on 2019/6/9 0009.
  */
 public class WordPagerAdapter extends FragmentStatePagerAdapter {
 

@@ -1,7 +1,7 @@
 package com.silence.utils;
 
 /**
- * Created by Silence on 2016/2/11 0011.
+ * Created by Autumn on 2019/6/11 0011.
  */
 public interface Const {
     String META_KEY = "com.silence.table.meta";

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
 
 /**
- * Created by Silence on 2016/1/30 0030.
+ * Created by Autumn on 2016/1/30 0030.
  */
 public class DBOpenHelper {
     private static DBOpenHelper sDBOpenHelper;
