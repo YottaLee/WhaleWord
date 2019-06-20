@@ -31,7 +31,7 @@ public class WordListActivity extends AppCompatActivity implements WordListFgt.o
             }
         }
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
