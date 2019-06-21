@@ -107,15 +107,41 @@
 
             <TextView
                     android:text="预计 分钟"
-                    android:gravity="left"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:textSize="20sp"
                     android:textStyle="bold" android:textColor="@android:color/darker_gray"/>
+            <RelativeLayout android:layout_height="10"></RelativeLayout>
 
 
         </TableRow>
 
         <TableRow>
+
+<!--            <LinearLayout android:layout_height="40">-->
+            <Button
+                    android:id="@+id/btnGetMp3s"
+                    android:text="复习"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/btn_circle"
+                    android:textStyle="bold" android:textColor="@color/colorPrimary"
+            />
+                <RelativeLayout android:layout_width="60" android:layout_height="1"></RelativeLayout>
+
+            <Button
+                    android:id="@+id/btnExitSys"
+                    android:text="学词"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+
+
+                    android:background="@drawable/btn_circle_blue"
+
+                    android:textStyle="bold" android:textColor="@android:color/white"/>
+
 
         </TableRow>
 
