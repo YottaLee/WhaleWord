@@ -19,7 +19,7 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/全部单词"
+                android:src="@mipmap/dic_all"
         />
         <TextView
                 android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/已学词"
+                android:src="@mipmap/dic_studied"
         />
         <TextView
                 android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/生词本"
+                android:src="@mipmap/dic_unfamiliar"
         />
         <TextView
                 android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/已掌握"
+                android:src="@mipmap/dic_handled"
         />
         <TextView
                 android:layout_width="wrap_content"
