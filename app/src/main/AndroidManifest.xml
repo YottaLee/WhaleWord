@@ -34,6 +34,11 @@
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
+                android:name="com.silence.activity.DicAcitivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
                 android:name="com.silence.activity.UnitListActivity"
                 android:screenOrientation="portrait"
         >

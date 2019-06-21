@@ -28,10 +28,9 @@ public class WordListFgt extends Fragment implements AdapterView.OnItemClickList
 
     private onWordClickListener mOnWordClickListener;
 
-    public static WordListFgt newInstance(String metaKey, int unitKey) {
+    public static WordListFgt newInstance(String dicKey) {
         Bundle bundle = new Bundle();
-        bundle.putInt(Const.UNIT_KEY, unitKey);
-        bundle.putString(Const.META_KEY, metaKey);
+        bundle.putString(Const.DIC_KEY, dicKey);
         WordListFgt wordListFgt = new WordListFgt();
         wordListFgt.setArguments(bundle);
         return wordListFgt;
