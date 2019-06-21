@@ -16,17 +16,16 @@ public class WordListActivity extends AppCompatActivity implements WordListFgt.o
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_word_list);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        Unit unit = getIntent().getParcelableExtra(Const.UNIT_KEY);
-        if (unit != null) {
-            String cat = unit.getMetaKey();
-            setTitle(cat.substring(cat.indexOf("_") + 1, cat.length()) + " - Unit - " + unit.getKey());
+        String key = getIntent().getStringExtra(Const.DIC_KEY);
+        if (key != null) {
+            setTitle(key);
             if (savedInstanceState == null) {
-                WordListFgt wordListFgt = WordListFgt.newInstance(unit.getMetaKey(), unit.getKey());
+                WordListFgt wordListFgt = WordListFgt.newInstance(key);
                 getSupportFragmentManager().beginTransaction().add(R.id.unit_content, wordListFgt).commit();
             }
         }

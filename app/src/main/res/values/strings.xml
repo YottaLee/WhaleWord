@@ -13,6 +13,10 @@
     <string name="cet4">大学英语四级词汇</string>
     <string name="cet6">大学英语六级词汇</string>
     <string name="ietsl">雅思词汇</string>
+    <string name="dic_all">全部单词</string>
+    <string name="dic_unfamiliar">生词本</string>
+    <string name="dic_studied">已学词</string>
+    <string name="dic_handled">已掌握</string>
     <string name="gre">美国研究生入学考试词汇</string>
     <string name="unit">Unit</string>
     <string name="iv_word">word list image</string>
