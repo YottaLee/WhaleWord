@@ -5,16 +5,6 @@
     android:orientation="horizontal"
     android:padding="5dp">
 
-    <TextView
-        android:id="@+id/trans_kaofa"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:text="考法"
-        android:textColor="@color/color_word_list"
-        android:textSize="20sp"
-        android:layout_alignParentTop="true" />
     <!--<TextView-->
         <!--android:id="@+id/trans_example"-->
         <!--android:text="例句"-->
