@@ -46,19 +46,19 @@ public class DicFragment extends Fragment {
                 switch (v.getId()) {
                     case R.id.lv_all:
                         intent.setClass(getActivity(), WordListActivity.class);
-                        intent.putExtra(Const.WORD_KEY, Const.DIC_ALL);
+                        intent.putExtra(Const.DIC_KEY, Const.DIC_ALL);
                         break;
                     case R.id.lv_studied:
                         intent.setClass(getActivity(), WordListActivity.class);
-                        intent.putExtra(Const.WORD_KEY, Const.DIC_STUDIED);
+                        intent.putExtra(Const.DIC_KEY, Const.DIC_STUDIED);
                         break;
                     case R.id.lv_unfamiliar:
                         intent.setClass(getActivity(), WordListActivity.class);
-                        intent.putExtra(Const.WORD_KEY, Const.DIC_UNFAMILIAR);
+                        intent.putExtra(Const.DIC_KEY, Const.DIC_UNFAMILIAR);
                         break;
                     case R.id.lv_handled:
                         intent.setClass(getActivity(), WordListActivity.class);
-                        intent.putExtra(Const.WORD_KEY, Const.DIC_HANDLED);
+                        intent.putExtra(Const.DIC_KEY, Const.DIC_HANDLED);
                         break;
                 }
                 startActivity(intent);

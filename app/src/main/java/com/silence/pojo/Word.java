@@ -21,6 +21,17 @@ public class Word implements Parcelable {
         labels = new ArrayList<>();
     }
 
+    public Word(int mid, String mkey, List<Trans> mtranslist, List<Label> labels) {
+        this.mid = mid;
+        this.mkey = mkey;
+        this.mtranslist = mtranslist;
+        this.labels = labels;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
     /**
      * 掌握该单词
      */

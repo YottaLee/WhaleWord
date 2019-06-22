@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.silence.fragment.DicFragment;
+import com.silence.fragment.MainFragment;
 import com.silence.fragment.OriginalFragment;
 import com.silence.fragment.TabContentFragment;
 import com.silence.signcalendar.I8ShowSignCalendarActivity;
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabIndicators.add("主页");
         tabIndicators.add("词库");
         tabFragments = new ArrayList<>();
-        tabFragments.add(OriginalFragment.newInstance());
+        tabFragments.add(MainFragment.newInstance());
         tabFragments.add(DicFragment.newInstance());
         contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
         mContentVp.setAdapter(contentAdapter);

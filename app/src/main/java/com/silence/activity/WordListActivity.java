@@ -26,7 +26,7 @@ public class WordListActivity extends AppCompatActivity implements WordListFgt.o
             setTitle(key);
             if (savedInstanceState == null) {
                 WordListFgt wordListFgt = WordListFgt.newInstance(key);
-                getSupportFragmentManager().beginTransaction().add(R.id.unit_content, wordListFgt).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.word_list_content, wordListFgt).commit();
             }
         }
     }
