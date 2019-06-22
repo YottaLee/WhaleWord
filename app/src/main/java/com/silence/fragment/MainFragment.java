@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.silence.activity.CountActivity;
 import com.silence.dao.CalendarDao;
 import com.silence.utils.FileUtils;
+import com.silence.utils.SDUtil;
 import com.silence.word.R;
 
 import java.util.regex.Matcher;
@@ -85,6 +86,17 @@ public class MainFragment extends Fragment {
 //        CalendarDao calendarDao = new CalendarDao();
 //        String res = calendarDao.listDay("2019", "05", getContext());
 //        System.out.println(res);
+        SDUtil sdUtil = new SDUtil(getContext());
+        sdUtil.verifyStoragePermissions(getActivity());
+        try {
+            sdUtil.savaFileToSD("day.txt", "2");
+            Thread.sleep(2000);
+            String content = sdUtil.readFromSD("day.txt");
+            System.out.println( "ccccccontent" + content);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
         return contentView;
     }
 }
