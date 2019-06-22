@@ -287,10 +287,8 @@ public class CalendarFragment extends Fragment {
         btn_sign.setText("已签到");
         isSign = true;//模拟当天已签到
 
-
         ivSun.setImageResource(R.drawable.i8live_sun);
         tvGetSunValue.setText("恭喜获得10个阳光值");
-
 
         Animation operatingAnim = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_anim_online_gift);
         LinearInterpolator lin = new LinearInterpolator();
