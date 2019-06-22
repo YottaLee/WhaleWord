@@ -18,7 +18,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
     public static final int BEFORE_TODAY_BACKGROUND = Color.parseColor("#FFE4E4E4"); // 星期标题文字颜色
     public static final int COLOR_TX_THIS_MONTH_DAY = Color.parseColor("#000000"); // 当前月日历数字颜色
     public static final int COLOR_TX_OTHER_MONTH_DAY = Color.parseColor("#ff999999"); // 其他月日历数字颜色
-    public static final int COLOR_TX_THIS_DAY = Color.parseColor("#00ff00"); // 当天日历数字颜色
+    public static final int COLOR_TX_THIS_DAY = Color.parseColor("#FF5959"); // 当天日历数字颜色#00ff00
     public static final int COLOR_BG_THIS_DAY = Color.parseColor("#ffcccccc"); // 当天日历背景颜色
     public static final int COLOR_BG_CALENDAR = Color.parseColor("#FFFFFF"); // 日历背景色
 

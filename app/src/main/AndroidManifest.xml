@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-        package="com.silence.word"
+        xmlns:tools="http://schemas.android.com/tools" package="com.silence.word"
         xmlns:android="http://schemas.android.com/apk/res/android"
 >
 
@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
             android:allowBackup="true"
@@ -52,6 +54,11 @@
                 android:supportsRtl="true"
                 android:name="com.silence.activity.CountActivity"
                   android:screenOrientation="portrait"></activity>
+        <activity
+                android:name="com.silence.activity.PlanActivity"
+                android:screenOrientation="portrait"
+        >
+        </activity>
     </application>
 
 </manifest>

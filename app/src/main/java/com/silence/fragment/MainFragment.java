@@ -18,11 +18,12 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import com.silence.activity.CountActivity;
-import com.silence.activity.DetailActivity;
-import com.silence.activity.WordListActivity;
-import com.silence.pojo.Word;
-import com.silence.utils.Const;
+import com.silence.activity.PlanActivity;
+import com.silence.dao.CalendarDao;
+import com.silence.enums.RecordType;
 import com.silence.utils.FileUtils;
+import com.silence.utils.SDUtil;
+import com.silence.utils.WRUtil;
 import com.silence.word.R;
 
 import java.util.regex.Matcher;
@@ -88,26 +89,54 @@ public class MainFragment extends Fragment {
         TextView wordCount = (TextView) contentView.findViewById(R.id.word_count);
         wordCount.setText(wordCountStrSet);
 
-        Button btn_xueci = (Button) contentView.findViewById(R.id.btnExitSys);
+        Button changePlan = (Button) contentView.findViewById(R.id.plan_change);
+        initListener();
+        changePlan.setOnClickListener(listener);
 
-        listener = (View.OnClickListener)(v) ->{
-            Intent intent = new Intent();
-            switch (v.getId()) {
-                case R.id.btnExitSys:
-                    intent.setClass(getActivity(), DetailActivity.class);
-                    intent.putExtra(Const.DIC_KEY, Const.DIC_UNFAMILIAR);
-                    System.out.println("I click xueci!");
-                    break;
-                case R.id.lv_studied:
-                    intent.setClass(getActivity(), WordListActivity.class);
-                    intent.putExtra(Const.DIC_KEY, Const.DIC_STUDIED);
-                    break;
-            }
-            startActivity(intent);
-
-        };
-        btn_xueci.setOnClickListener(listener);
-
+        WRUtil wrUtil = new WRUtil();
+        SDUtil sdUtil = new SDUtil(getContext());
+//        wrUtil.writeFile(getContext(), "2019-06-19", RecordType.CALENDAR);
+//        wrUtil.writeFile(getContext(), "2019-06-20", RecordType.CALENDAR);
+//        wrUtil.writeFile(getContext(), "2019-06-21", RecordType.CALENDAR);
+//        wrUtil.writeFile(getContext(), "2019-06-22", RecordType.CALENDAR);
+//        try {
+//            String res = sdUtil.readFromSD("calendar.txt");
+//            System.out.println(res);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        System.out.println("**********");
+//        CalendarDao calendarDao = new CalendarDao();
+//        String res = calendarDao.listDay("2019", "05", getContext());
+//        System.out.println(res);
+//        SDUtil sdUtil = new SDUtil(getContext());
+//        sdUtil.verifyStoragePermissions(getActivity());
+//        try {
+//            sdUtil.saveFileToSD("day.txt", "2");
+//            Thread.sleep(2000);
+//            String content = sdUtil.readFromSD("day.txt");
+//            System.out.println( "ccccccontent" + content);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//
+//        }
         return contentView;
+    }
+
+    /**
+     * 监听器初始化
+     */
+    private void initListener() {
+        listener = new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                switch (v.getId()) {
+                    case R.id.plan_change:
+                        intent.setClass(getActivity(), PlanActivity.class);
+                        break;
+                }
+                startActivity(intent);
+            }
+        };
     }
 }

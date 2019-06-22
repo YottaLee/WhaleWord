@@ -47,4 +47,16 @@
     <string name="exit_hint">再按一次退出程序</string>
     <string name="toast_too_fast">当前播放速度过快, 无法自动发音, 请调慢速度</string>
     <string name="toast_connect">请检查是否连接网络</string>
+    <string name="cancel">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="confirm">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="begin_date">开始日期</string>
+    <string name="current_date">截止日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="current_time">当前时间</string>
 </resources>

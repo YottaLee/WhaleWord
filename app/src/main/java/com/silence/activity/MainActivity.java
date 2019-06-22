@@ -24,6 +24,7 @@ import com.silence.fragment.DicFragment;
 import com.silence.fragment.MainFragment;
 import com.silence.fragment.OriginalFragment;
 import com.silence.fragment.TabContentFragment;
+import com.silence.studyplan.PickerView;
 import com.silence.utils.Const;
 import com.silence.word.R;
 
