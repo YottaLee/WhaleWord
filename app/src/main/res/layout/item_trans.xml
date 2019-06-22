@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <!--<TextView-->
+        <!--android:id="@+id/trans_example"-->
+        <!--android:text="例句"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:textSize="10sp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_below="@+id/trans_kaofa"-->
+        <!--/>-->
+
+    <ImageView
+        android:id="@+id/iv_trans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/iv_trans"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/word_trans"/>
+
+    <TextView
+        android:id="@+id/trans_kaofa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/iv_trans"
+        android:layout_alignLeft="@id/iv_trans"
+        android:layout_alignRight="@id/iv_trans"
+        android:layout_alignStart="@id/iv_trans"
+        android:layout_below="@id/iv_trans"
+        android:layout_marginTop="10dp"
+        android:text="考法"
+        android:textColor="@color/color_trans_detail"
+        android:textSize="12sp"
+        />
+    
+
+    <TextView
+        android:id="@+id/trans_example"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/iv_trans"
+        android:layout_alignLeft="@id/iv_trans"
+        android:layout_alignRight="@id/iv_trans"
+        android:layout_alignStart="@id/iv_trans"
+        android:layout_below="@id/trans_kaofa"
+        android:layout_marginTop="10dp"
+        android:text="v. 煽动，教唆，教唆某人犯罪"
+        android:textColor="@color/color_trans_detail"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:id="@+id/trans_synonym"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/iv_trans"
+        android:layout_alignLeft="@id/iv_trans"
+        android:layout_alignRight="@id/iv_trans"
+        android:layout_alignStart="@id/iv_trans"
+        android:layout_below="@id/trans_example"
+        android:layout_marginTop="10dp"
+        android:text="近义词"
+        android:textColor="@color/color_trans_detail"
+        android:textSize="12sp"
+        />
+
+
+    <TextView
+        android:id="@+id/trans_antonym"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/iv_trans"
+        android:layout_alignLeft="@id/iv_trans"
+        android:layout_alignRight="@id/iv_trans"
+        android:layout_alignStart="@id/iv_trans"
+        android:layout_below="@id/trans_synonym"
+        android:layout_marginTop="10dp"
+        android:text="近义词"
+        android:textColor="@color/color_trans_detail"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:id="@+id/trans_derivative"
+        android:text="派生词"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/iv_trans"
+        android:layout_alignLeft="@id/iv_trans"
+        android:layout_alignRight="@id/iv_trans"
+        android:layout_alignStart="@id/iv_trans"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_trans_detail"
+        android:textSize="12sp"
+        android:layout_below="@+id/trans_antonym"
+        />
+
+</RelativeLayout>

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.silence.fragment.CalendarFragment;
 import com.silence.fragment.DicFragment;
+import com.silence.fragment.MainFragment;
 import com.silence.fragment.OriginalFragment;
 import com.silence.fragment.TabContentFragment;
 import com.silence.utils.Const;
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabIndicators.add("词库");
         tabIndicators.add("日历");
         tabFragments = new ArrayList<>();
-        tabFragments.add(OriginalFragment.newInstance());
+        tabFragments.add(MainFragment.newInstance());
         tabFragments.add(DicFragment.newInstance());
         tabFragments.add(CalendarFragment.newInstance());
         contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
