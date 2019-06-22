@@ -3,8 +3,16 @@ package com.silence.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.silence.dao.Utils;
+import com.silence.pojo.Word;
 import com.silence.utils.FileUtils;
 import com.silence.word.R;
+
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * @Author: py
@@ -32,6 +40,9 @@ public class CountActivity extends Activity {
         TextView wordCount = (TextView) findViewById(R.id.word_count);
         wordCount.setText(FileUtils.readFile(CountActivity.this, "word"));
         wordCount.setTextSize(20);
+
+
+
 
     }
 
