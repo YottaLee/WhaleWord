@@ -1,5 +1,6 @@
 package com.silence.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,9 +14,11 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import com.silence.activity.CountActivity;
+import com.silence.activity.PlanActivity;
 import com.silence.dao.CalendarDao;
 import com.silence.utils.FileUtils;
 import com.silence.word.R;
@@ -27,6 +30,8 @@ import java.util.regex.Pattern;
  * Created by Autumn on 2019/6/22
  */
 public class MainFragment extends Fragment {
+
+    private View.OnClickListener listener;
 
     public static MainFragment newInstance() {
         Bundle arguments = new Bundle();
@@ -81,10 +86,30 @@ public class MainFragment extends Fragment {
         TextView wordCount = (TextView) contentView.findViewById(R.id.word_count);
         wordCount.setText(wordCountStrSet);
 
+        Button changePlan = (Button) contentView.findViewById(R.id.plan_change);
+        initListener();
+        changePlan.setOnClickListener(listener);
 //        System.out.println("**********");
 //        CalendarDao calendarDao = new CalendarDao();
 //        String res = calendarDao.listDay("2019", "05", getContext());
 //        System.out.println(res);
         return contentView;
+    }
+
+    /**
+     * 监听器初始化
+     */
+    private void initListener() {
+        listener = new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                switch (v.getId()) {
+                    case R.id.plan_change:
+                        intent.setClass(getActivity(), PlanActivity.class);
+                        break;
+                }
+                startActivity(intent);
+            }
+        };
     }
 }
