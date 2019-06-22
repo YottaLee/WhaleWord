@@ -60,6 +60,16 @@
         />
     </TableRow>
 
+    <TextView
+            android:id="@+id/text_sign_calendar"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="签到"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:background="#e5e5e5" />
+
     <ImageView
             android:id="@+id/iv_gre"
             android:layout_width="wrap_content"
