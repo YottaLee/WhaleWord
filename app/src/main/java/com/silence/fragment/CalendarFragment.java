@@ -1,6 +1,7 @@
 package com.silence.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.silence.activity.MainActivity;
+import com.silence.dao.CalendarDao;
 import com.silence.signcalendar.SignCalendar;
 import com.silence.signcalendar.SignCalendarReq;
 import com.silence.utils.Const;
@@ -124,7 +126,7 @@ public class CalendarFragment extends Fragment {
                 String signDay = dataBean.getSignDay();
                 String[] splitDay = signDay.split(",");
 
-                //System.out.println("已签到日期: " + signDay);
+                System.out.println("已签到日期: " + signDay);
 
                 //list中存储的格式为2019-06-02
                 for (int i = 0; i < splitDay.length; i++) {
@@ -207,8 +209,33 @@ public class CalendarFragment extends Fragment {
 
     private void initData() {
         //System.out.println("调用initData()方法");
-        //模拟请求后台返回初始化数据
+        isSign = false;
 
+        signCalendarReq = new SignCalendarReq();
+
+        SignCalendarReq.StateBean state = new SignCalendarReq.StateBean();
+        state.setCode(1);
+        state.setMsg("成功");
+        signCalendarReq.setState(state);
+
+        SignCalendarReq.DataBean data = new SignCalendarReq.DataBean();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date curDate = new Date(System.currentTimeMillis());
+        String curDateStr = formatter.format(curDate);
+        data.setConSign(1);
+        String signDays = getSignDaysAndCheckToday(curDateStr.substring(0, 4), curDateStr.substring(5, 7), getContext(), curDateStr);
+        data.setSignDay(signDays);
+        data.setIsSign(0);
+        if(isSign){
+            data.setIsSign(1);
+        }
+        data.setUid("3347922");
+        signCalendarReq.setData(data);
+
+        System.out.println("init_seq: " + signCalendarReq.getData().getUid() + ", " + signCalendarReq.getData().getSignDay() + "," + signCalendarReq.getData().getIsSign());
+
+        /*
+        //模拟请求后台返回初始化数据
         //SignCalendarReq local_signCalendarReq = new SignCalendarReq();
         signCalendarReq = new SignCalendarReq();
 
@@ -223,9 +250,32 @@ public class CalendarFragment extends Fragment {
         data.setSignDay("1,2");
         data.setUid("3347922");
         signCalendarReq.setData(data);
-
         //System.out.println("init_seq: " + signCalendarReq.getData().getUid() + ", " + signCalendarReq.getData().getSignDay() + "," + signCalendarReq.getData().getIsSign());
+        */
 
+    }
+
+
+    private String getSignDaysAndCheckToday(String year, String month, Context context, String date_today){
+        String signDays = "";
+
+        CalendarDao calendarDao = new CalendarDao();
+        String dates = calendarDao.listDay(year, month, context);
+        String datesArr[] = dates.split(",");
+        for(int i = 0;i < datesArr.length;i++){
+            if(date_today.equals(datesArr[i])){
+                isSign = true;
+            }
+            if(i == 0){
+                signDays = datesArr[i].substring(8);
+            }
+            else{
+                signDays = signDays + "," + datesArr[i].substring(8);  //yyyy-MM-dd，取"dd"
+            }
+        }
+        System.out.println("signDays: " + signDays);
+
+        return signDays;
     }
 
 
