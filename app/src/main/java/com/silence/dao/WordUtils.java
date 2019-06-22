@@ -17,7 +17,7 @@ public class WordUtils {
 
     public List<Word> getWordByLabel(String value, Context context) {
         try {
-            List<Word> allWords = new Utils().getJsonWords();
+            List<Word> allWords = new Utils().getJsonWords(context);
             Label label = Label.Studied;
             switch (value) {
                 case Const.DIC_ALL:

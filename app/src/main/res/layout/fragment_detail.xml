@@ -34,7 +34,7 @@
     <ListView
         android:id="@+id/trans_list"
         android:layout_width="match_parent"
-        android:layout_height="628dp"
+        android:layout_height="600dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
