@@ -2,8 +2,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="@android:color/holo_blue_light"
-             android:padding="5dp"
+             android:background="@color/colorPrimary"
              tools:context="com.silence.activity.CountActivity"
 >
 
@@ -120,11 +119,12 @@
 
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                 xmlns:tools="http://schemas.android.com/tools"
+                 android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  android:background="@android:color/white"
                  android:padding="5dp"
-                 android:layoutDirection="locale"
+
     >
         <TableRow
                 android:layout_marginTop="5dp"

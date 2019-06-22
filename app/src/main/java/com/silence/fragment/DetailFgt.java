@@ -58,12 +58,13 @@ public class DetailFgt extends Fragment {
 //        });
 //        if (word != null) {
 //            tvKey.setText(word.getMkey());
-//            tvExample.setText(wordLast.getExample());
-//            tvKey.setText(wordLast.getKey());
-//            tvPhono.setText("[" + wordLast.getPhono() + "]");
-//            tvTrans.setText(wordLast.getTrans());
+////            tvExample.setText(wordLast.getExample());
+////            tvKey.setText(wordLast.getKey());
+////            tvPhono.setText("[" + wordLast.getPhono() + "]");
+////            tvTrans.setText(wordLast.getTrans());
 //        }
-        return view;
+//        return view;
+        return null;
     }
 
     public void setSpeakImg(int resId) {
