@@ -59,7 +59,7 @@ public class Utils {
         List<Word> wordList = new ArrayList<>();
         for(int j = 0; j<JsonContext.size(); j++){
             String s = JsonContext.get(j);
-            System.out.println("string:"+s);
+//            System.out.println("string:"+s);
             JSONObject dataJson = new JSONObject(s);
             JSONArray meaningList = dataJson.getJSONArray("trans");
             String wordtext = dataJson.getString("word");
@@ -79,9 +79,9 @@ public class Utils {
                         List<String> eList = new ArrayList<>();
                         if(exampleList != null && exampleList.length() !=0){
                             for(int k =0; k<exampleList.length(); k++){
-                                System.out.println("k: "+k);
+//                                System.out.println("k: "+k);
                                 String e  =(String) exampleList.getString(k);
-                                System.out.println("s: "+e);
+//                                System.out.println("s: "+e);
                                 if(e != null) {
                                     boolean b = eList.add(e);
                                 }

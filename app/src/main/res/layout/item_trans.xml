@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="280dp"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:padding="3dp">
 
     <!--<TextView-->
         <!--android:id="@+id/trans_example"-->
@@ -36,7 +37,7 @@
         android:layout_alignStart="@id/iv_trans"
         android:layout_below="@id/iv_trans"
         android:layout_marginTop="10dp"
-        android:text="考法"
+        android:text=""
         android:textColor="@color/color_trans_detail"
         android:textSize="12sp"
         />
@@ -52,7 +53,6 @@
         android:layout_alignStart="@id/iv_trans"
         android:layout_below="@id/trans_kaofa"
         android:layout_marginTop="10dp"
-        android:text="v. 煽动，教唆，教唆某人犯罪"
         android:textColor="@color/color_trans_detail"
         android:textSize="12sp"
         />
@@ -67,7 +67,6 @@
         android:layout_alignStart="@id/iv_trans"
         android:layout_below="@id/trans_example"
         android:layout_marginTop="10dp"
-        android:text="近义词"
         android:textColor="@color/color_trans_detail"
         android:textSize="12sp"
         />
@@ -83,14 +82,12 @@
         android:layout_alignStart="@id/iv_trans"
         android:layout_below="@id/trans_synonym"
         android:layout_marginTop="10dp"
-        android:text="近义词"
         android:textColor="@color/color_trans_detail"
         android:textSize="12sp"
         />
 
     <TextView
         android:id="@+id/trans_derivative"
-        android:text="派生词"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@id/iv_trans"

@@ -146,8 +146,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initViews() {
-        tvPlay = (TextView) findViewById(R.id.tv_play);
-        tvPlay.setOnClickListener(this);
+//        tvPlay = (TextView) findViewById(R.id.tv_play);
+//        tvPlay.setOnClickListener(this);
         findViewById(R.id.btn_prev).setOnClickListener(this);
         findViewById(R.id.btn_next).setOnClickListener(this);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -169,24 +169,27 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_prev:
-                if (mIsPlaying) {
-                    pause();
-                }
-                if (mWordKey - 1 < 0) {
-                    Toast.makeText(this, R.string.first_page, Toast.LENGTH_SHORT).show();
-                    break;
-                } else {
-                    mWordKey--;
-                }
-                mViewPager.setCurrentItem(mWordKey);
+//                if (mIsPlaying) {
+//                    pause();
+//                }
+//                if (mWordKey - 1 < 0) {
+//                    Toast.makeText(this, R.string.first_page, Toast.LENGTH_SHORT).show();
+//                    break;
+//                } else {
+//                    mWordKey--;
+//                }
+//                mViewPager.setCurrentItem(mWordKey);
+                Word currentword = mWordList.get(mWordKey);
+                currentword.forget();
+                System.out.println("forget");
                 break;
-            case R.id.tv_play:
-                if (mIsPlaying) {
-                    pause();
-                } else {
-                    play();
-                }
-                break;
+//            case R.id.tv_play:
+//                if (mIsPlaying) {
+//                    pause();
+//                } else {
+//                    play();
+//                }
+//                break;
             case R.id.btn_next:
                 if (mIsPlaying) {
                     pause();
@@ -198,6 +201,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     mWordKey++;
                 }
                 mViewPager.setCurrentItem(mWordKey);
+                Word currentword2 = mWordList.get(mWordKey);
+                currentword2.handle();
+                System.out.println("Known");
                 break;
         }
     }

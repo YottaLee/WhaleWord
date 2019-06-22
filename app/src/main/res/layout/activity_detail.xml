@@ -14,84 +14,90 @@
         android:layout_weight="1"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal"-->
+        <!--&gt;-->
 
 
-        <Button
-            android:id="@+id/btn_unfamiliar"
-            android:text="复习"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0sp"
-            android:gravity="center"
-            android:background="@drawable/btn_circle"
-            android:textStyle="bold" android:textColor="@color/colorPrimary"
-            />
-        <RelativeLayout android:layout_width="230sp" android:layout_height="1dp"></RelativeLayout>
-
-        <Button
-            android:id="@+id/btn_handle"
-            android:text="学词"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="0sp"
-            android:gravity="center"
-            android:background="@drawable/btn_circle"
-            android:textStyle="bold" android:textColor="@color/colorPrimary"/>
-
-        <!--<TextView-->
+        <!--<Button-->
             <!--android:id="@+id/btn_unfamiliar"-->
-            <!--style="@style/bottom_bar_style"-->
-            <!--android:drawableTop="@drawable/btn_circle"-->
             <!--android:text="陌生"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="0sp"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/btn_circle"-->
+            <!--android:textStyle="bold" android:textColor="@color/colorPrimary"-->
             <!--/>-->
+        <!--<RelativeLayout android:layout_width="230sp" android:layout_height="1dp"></RelativeLayout>-->
 
-
-        <!--<TextView-->
+        <!--<Button-->
             <!--android:id="@+id/btn_handle"-->
-            <!--style="@style/bottom_bar_style"-->
-            <!--android:drawableTop="@drawable/btn_circle_blue"-->
             <!--android:text="熟悉"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginRight="0sp"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/btn_circle"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/colorPrimary"-->
             <!--/>-->
-    </LinearLayout>
+
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/btn_unfamiliar"&ndash;&gt;-->
+            <!--&lt;!&ndash;style="@style/bottom_bar_style"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:drawableTop="@drawable/btn_circle"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="陌生"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/btn_handle"&ndash;&gt;-->
+            <!--&lt;!&ndash;style="@style/bottom_bar_style"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:drawableTop="@drawable/btn_circle_blue"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="熟悉"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+    <!--</LinearLayout>-->
 
 
 
-
-
-
+    <!--android:background="@mipmap/bottom_bg"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@mipmap/bottom_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         >
 
+        <!--android:drawableTop="@drawable/btn_previous_selector"-->
         <TextView
             android:id="@+id/btn_prev"
             style="@style/bottom_bar_style"
-            android:drawableTop="@drawable/btn_previous_selector"
-            android:text="@string/tv_back"
+            android:background="@drawable/btn_circle"
+            android:text="陌生"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             />
 
-        <TextView
-            android:id="@+id/tv_play"
-            style="@style/bottom_bar_style"
-            android:drawableTop="@drawable/btn_play_selector"
-            android:text="@string/tv_play"
-            />
-
+        <!--android:drawableTop="@drawable/btn_next_selector"-->
         <TextView
             android:id="@+id/btn_next"
             style="@style/bottom_bar_style"
-            android:drawableTop="@drawable/btn_next_selector"
-            android:text="@string/tv_next"
+            android:background="@drawable/btn_circle"
+            android:text="熟悉"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             />
     </LinearLayout>
 </LinearLayout>

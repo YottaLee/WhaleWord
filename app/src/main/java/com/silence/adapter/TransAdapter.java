@@ -30,7 +30,7 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
 
     @Override
     public int getCount() {
-        return 0;
+        return mTransList != null ? mTransList.size() : 0;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TransAdapter.ViewHolder viewHolder;
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_trans, parent, false);
             viewHolder = new TransAdapter.ViewHolder();
@@ -56,7 +56,7 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             viewHolder.trans_derivative = (TextView) convertView.findViewById(R.id.trans_derivative);
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (TransAdapter.ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
         Trans trans = mTransList.get(position);
         viewHolder.trans_kaofa.setText("考法："+String.valueOf(trans.getKaofa()));
@@ -67,17 +67,36 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             for(String e: eList){
                 res+= (e+"\r\n");
             }
+            res = "例："+res;
+            viewHolder.trans_example.setText(res);
         }
-        viewHolder.trans_example.setText(res);
-        viewHolder.trans_synonym.setText("近："+String.valueOf(trans.getSynonym()));
-        viewHolder.trans_antonym.setText("反："+String.valueOf(trans.getAntonym()));
-        viewHolder.trans_synonym.setText("派："+String.valueOf(trans.getDerivative()));
+
+        if(trans.getSynonym()!= null && !trans.getSynonym().isEmpty() && trans.getSynonym().length() !=0 && trans.getSynonym()!= "null" && trans.getSynonym()!= ""){
+            viewHolder.trans_synonym.setText("近："+trans.getSynonym());
+        }
+        else{
+            viewHolder.trans_synonym.setText(" ");
+        }
+        if(trans.getAntonym()!= null && !trans.getAntonym().isEmpty() && trans.getAntonym().length() != 0&& trans.getAntonym()!= "null" && trans.getAntonym()!= ""){
+            viewHolder.trans_antonym.setText("反："+trans.getAntonym());
+        }
+        else{
+            viewHolder.trans_antonym.setText(" ");
+        }
+        if(trans.getDerivative()!= null && !trans.getDerivative().isEmpty()&& trans.getDerivative().length() != 0 && trans.getDerivative()!= "null" && trans.getDerivative()!= ""){
+            viewHolder.trans_derivative.setText("派："+trans.getDerivative());
+            System.out.println(3+"????"+trans.getDerivative());
+        }
+        else{
+            viewHolder.trans_derivative.setText(" ");
+            System.out.println(3+"!!!!!");
+        }
         return convertView;
     }
 
     @Override
     public String getIndicatorForPosition(int childposition, int groupposition) {
-        return String.valueOf(mTransList.indexOf(childposition));
+        return String.valueOf(mTransList.get(childposition).getKaofa().charAt(0));
     }
 
     @Override
