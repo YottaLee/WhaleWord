@@ -42,27 +42,27 @@ public class DetailFgt extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
-        TextView tvExample = (TextView) view.findViewById(R.id.tv_exam);
-        TextView tvKey = (TextView) view.findViewById(R.id.tv_key);
-        TextView tvPhono = (TextView) view.findViewById(R.id.tv_phono);
-        TextView tvTrans = (TextView) view.findViewById(R.id.tv_trans);
-        final Word word = getArguments().getParcelable(Const.WORD_KEY);
-        mImageView = (ImageView) view.findViewById(R.id.icon_speech);
-        mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnSpeechListener != null) {
-                    mOnSpeechListener.speech(word);
-                }
-            }
-        });
-        if (word != null) {
-            tvKey.setText(word.getMkey());
+//        TextView tvExample = (TextView) view.findViewById(R.id.tv_exam);
+//        TextView tvKey = (TextView) view.findViewById(R.id.tv_key);
+//        TextView tvPhono = (TextView) view.findViewById(R.id.tv_phono);
+//        TextView tvTrans = (TextView) view.findViewById(R.id.tv_trans);
+//        final Word word = getArguments().getParcelable(Const.WORD_KEY);
+//        mImageView = (ImageView) view.findViewById(R.id.icon_speech);
+//        mImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mOnSpeechListener != null) {
+//                    mOnSpeechListener.speech(word);
+//                }
+//            }
+//        });
+//        if (word != null) {
+//            tvKey.setText(word.getMkey());
 //            tvExample.setText(wordLast.getExample());
 //            tvKey.setText(wordLast.getKey());
 //            tvPhono.setText("[" + wordLast.getPhono() + "]");
 //            tvTrans.setText(wordLast.getTrans());
-        }
+//        }
         return view;
     }
 

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.andraskindler.quickscroll.QuickScroll;
+import com.silence.activity.DetailActivity;
 import com.silence.adapter.WordAdapter;
 import com.silence.dao.Utils;
 import com.silence.dao.WordDao;
@@ -57,13 +58,13 @@ public class WordListFgt extends Fragment implements AdapterView.OnItemClickList
         Bundle bundle = getArguments();
         Utils utils = new Utils();
         List<Word> wordList = null;//twordDao.getWords(bundle.getString(Const.META_KEY), bundle.getInt(Const.UNIT_KEY));
-        try {
-            wordList = utils.getJsonWords();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            mWordList = Utils.getJsonWords(DetailActivity.this);
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         WordAdapter wordAdapter = new WordAdapter(getActivity(), wordList);
         listView.setAdapter(wordAdapter);
         listView.setOnItemClickListener(this);

@@ -34,6 +34,7 @@ import com.silence.fragment.DetailFgt;
 import com.silence.pojo.Word;
 import com.silence.pojo.Word;
 import com.silence.utils.Const;
+import com.silence.utils.FileUtils;
 import com.silence.utils.WavWriter;
 import com.silence.word.R;
 import org.json.JSONException;
@@ -81,12 +82,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 //        WordDao wordDao = new WordDao(this);
         Utils utils = new Utils();
         try {
-            mWordList = utils.getJsonWords();//wordDao.getWords(mMetaKey, mUnitKey);
+            mWordList = Utils.getJsonWords(DetailActivity.this);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         mPlayHandler = new PlayHandler(this);
         initViews();
         initSpeech();
