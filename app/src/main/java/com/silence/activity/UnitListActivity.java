@@ -27,6 +27,7 @@ import com.silence.fragment.SearchFgt;
 import com.silence.fragment.UnitListFgt;
 import com.silence.pojo.Unit;
 import com.silence.pojo.Word;
+import com.silence.pojo.WordLast;
 import com.silence.utils.Const;
 import com.silence.utils.WavWriter;
 import com.silence.word.R;
@@ -159,11 +160,11 @@ public class UnitListActivity extends AppCompatActivity implements SearchView.On
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        ArrayList<Word> words = null;
+        ArrayList<WordLast> wordLasts = null;
         if (!TextUtils.isEmpty(newText)) {
-            words = mWordDao.queryWords(mMetaKey, newText);
+            wordLasts = mWordDao.queryWords(mMetaKey, newText);
         }
-        mSearchFgt.refresh(words);
+        mSearchFgt.refresh(wordLasts);
         return true;
     }
 
@@ -236,7 +237,7 @@ public class UnitListActivity extends AppCompatActivity implements SearchView.On
     @Override
     public void speech(Word word) {
         mDetailFgt.setSpeakImg(R.mipmap.icon_speaker_on);
-        String content = word.getKey();
+        String content = word.getMkey();
         String path = getExternalCacheDir() + File.separator + "word_" + content + ".pcm";
         final File file = new File(path);
         if (file.exists()) {

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.silence.pojo.Word;
+import com.silence.pojo.WordLast;
 import com.silence.utils.Const;
 import com.silence.word.R;
 
@@ -56,10 +57,11 @@ public class DetailFgt extends Fragment {
             }
         });
         if (word != null) {
-            tvExample.setText(word.getExample());
-            tvKey.setText(word.getKey());
-            tvPhono.setText("[" + word.getPhono() + "]");
-            tvTrans.setText(word.getTrans());
+            tvKey.setText(word.getMkey());
+//            tvExample.setText(wordLast.getExample());
+//            tvKey.setText(wordLast.getKey());
+//            tvPhono.setText("[" + wordLast.getPhono() + "]");
+//            tvTrans.setText(wordLast.getTrans());
         }
         return view;
     }

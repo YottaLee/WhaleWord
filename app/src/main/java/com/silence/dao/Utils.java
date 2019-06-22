@@ -4,7 +4,7 @@ package com.silence.dao;
 //import com.google.gson.JsonObject;
 //import com.google.gson.stream.JsonReader;
 import com.silence.pojo.Trans;
-import com.silence.pojo.newword;
+import com.silence.pojo.Word;
 
 
 import org.json.JSONArray;
@@ -49,12 +49,12 @@ public class Utils {
         return laststr;
     }
 
-    public List<newword> getJsonWords() throws UnsupportedEncodingException, JSONException {
+    public List<Word> getJsonWords() throws UnsupportedEncodingException, JSONException {
         List<String> JsonContext = new Utils().ReadFile("app\\src\\main\\res\\raw\\wordlist.json");
 //        System.out.println(JsonContext.get(0));
 
 
-        List<newword> newwordList = null;
+        List<Word> wordList = null;
         for(int j = 0; j<JsonContext.size(); j++){
             String s = JsonContext.get(j);
             JSONObject dataJson = new JSONObject(s);
@@ -89,10 +89,10 @@ public class Utils {
                 }
             }
 
-            newword word = new newword(j, wordtext, transList);
-            newwordList.add(word);
+            Word word = new Word(j, wordtext, transList);
+            wordList.add(word);
         }
-        return newwordList;
+        return wordList;
     }
 
 

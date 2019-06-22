@@ -28,15 +28,19 @@ import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 import com.silence.adapter.WordPagerAdapter;
 import com.silence.dao.UnitDao;
+import com.silence.dao.Utils;
 import com.silence.dao.WordDao;
 import com.silence.fragment.DetailFgt;
+import com.silence.pojo.Word;
 import com.silence.pojo.Word;
 import com.silence.utils.Const;
 import com.silence.utils.WavWriter;
 import com.silence.word.R;
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Timer;
@@ -74,8 +78,15 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         mMetaKey = intent.getStringExtra(Const.META_KEY);
         mUnitKey = intent.getIntExtra(Const.UNIT_KEY, 1);
         mWordKey = intent.getIntExtra(Const.WORD_KEY, 1);
-        WordDao wordDao = new WordDao(this);
-        mWordList = wordDao.getWords(mMetaKey, mUnitKey);
+//        WordDao wordDao = new WordDao(this);
+        Utils utils = new Utils();
+        try {
+            mWordList = utils.getJsonWords();//wordDao.getWords(mMetaKey, mUnitKey);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         mPlayHandler = new PlayHandler(this);
         initViews();
         initSpeech();
@@ -215,7 +226,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void speech(Word word) {
-        String content = word.getKey();
+        String content = word.getMkey();
         String path = getExternalCacheDir() + File.separator + "word_" + content + ".pcm";
         final File file = new File(path);
         if (file.exists()) {
