@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.andraskindler.quickscroll.Scrollable;
 import com.silence.pojo.Word;
+import com.silence.pojo.WordLast;
 import com.silence.word.R;
 
 import java.util.List;
@@ -47,19 +48,19 @@ public class WordAdapter extends BaseAdapter implements Scrollable {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_word, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.tvWord = (TextView) convertView.findViewById(R.id.tv_item_word);
-            viewHolder.tvWordTrans = (TextView)convertView.findViewById(R.id.tv_item_word_trans);
+//            viewHolder.tvWordTrans = (TextView)convertView.findViewById(R.id.tv_item_word_trans);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tvWord.setText(mWordList.get(position).getKey());
-        viewHolder.tvWordTrans.setText(mWordList.get(position).getTrans());
+        viewHolder.tvWord.setText(mWordList.get(position).getMkey());
+//        viewHolder.tvWordTrans.setText(mWordList.get(position).getTrans());
         return convertView;
     }
 
     @Override
     public String getIndicatorForPosition(int childposition, int groupposition) {
-        return String.valueOf(mWordList.get(childposition).getKey().charAt(0));
+        return String.valueOf(mWordList.get(childposition).getMkey().charAt(0));
     }
 
     @Override
@@ -69,6 +70,6 @@ public class WordAdapter extends BaseAdapter implements Scrollable {
 
     static class ViewHolder {
         TextView tvWord;
-        TextView tvWordTrans;
+//        TextView tvWordTrans;
     }
 }

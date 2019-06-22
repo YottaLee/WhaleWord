@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.silence.fragment.DetailFgt;
 import com.silence.pojo.Word;
+import com.silence.pojo.WordLast;
 
 import java.util.List;
 
