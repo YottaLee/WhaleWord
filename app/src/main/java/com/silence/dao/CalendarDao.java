@@ -3,9 +3,11 @@ package com.silence.dao;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import com.silence.enums.RecordType;
 import com.silence.utils.Const;
 import com.silence.utils.FileUtils;
 import com.silence.utils.SDUtil;
+import com.silence.utils.WRUtil;
 import com.silence.word.R;
 
 import java.io.*;
@@ -54,19 +56,14 @@ public class CalendarDao {
     public void punch(Context context) {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        WRUtil wrUtil = new WRUtil();
+
         String currentDate = dateFormat.format(new Date());
         System.out.println(currentDate);
 
-       Uri uri= Uri.parse("android.resource://com.silence.word/" + R.raw.calendar);
-
-        InputStream inputStream = context.getResources().openRawResource(R.raw.calendar);
-
         try {
-            File calendarFile = new File(String.valueOf(uri));
-            FileWriter fileWriter = new FileWriter(calendarFile, true);
-            fileWriter.write(currentDate);
-            fileWriter.close();
-
+            wrUtil.writeFile(context, currentDate, RecordType.CALENDAR);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
