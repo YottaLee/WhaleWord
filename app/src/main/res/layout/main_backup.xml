@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:textSize="20sp"
                     android:textStyle="bold" android:textColor="@android:color/darker_gray"/>
-            <RelativeLayout android:layout_height="10"></RelativeLayout>
+            <RelativeLayout android:layout_height="1dp"></RelativeLayout>
 
 
         </TableRow>
@@ -128,7 +128,7 @@
                     android:background="@drawable/btn_circle"
                     android:textStyle="bold" android:textColor="@color/colorPrimary"
             />
-            <RelativeLayout android:layout_width="60" android:layout_height="1"></RelativeLayout>
+            <RelativeLayout android:layout_width="60sp" android:layout_height="1dp"></RelativeLayout>
 
             <Button
                     android:id="@+id/btnExitSys"
