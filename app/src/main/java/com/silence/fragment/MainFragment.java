@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import com.silence.activity.CountActivity;
+import com.silence.dao.CalendarDao;
 import com.silence.utils.FileUtils;
 import com.silence.word.R;
 
@@ -79,6 +80,11 @@ public class MainFragment extends Fragment {
 
         TextView wordCount = (TextView) contentView.findViewById(R.id.word_count);
         wordCount.setText(wordCountStrSet);
+
+//        System.out.println("**********");
+//        CalendarDao calendarDao = new CalendarDao();
+//        String res = calendarDao.listDay("2019", "05", getContext());
+//        System.out.println(res);
         return contentView;
     }
 }
