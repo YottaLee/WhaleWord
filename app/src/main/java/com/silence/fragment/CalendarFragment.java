@@ -60,9 +60,17 @@ public class CalendarFragment extends Fragment {
         return tabContentFragment;
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+        /*if(dataBean !=null){
+            System.out.println("dataBean 0/1: " + dataBean.getIsSign());
+        }
+        else{
+            System.out.println("dataBean: null");
+        }*/
+
         View contentView = inflater.inflate(R.layout.fragment_sign_calendar, null);
         /*ImageView i8show_attention_back = (ImageView) contentView.findViewById(R.id.i8show_attention_back);
         TextView i8show_attention_tittle = (TextView) contentView.findViewById(R.id.i8show_attention_tittle);
@@ -74,11 +82,13 @@ public class CalendarFragment extends Fragment {
         TextView tv_text_one = (TextView) contentView.findViewById(R.id.tv_text_one);*/
 
         initData();
+
         //savedInstanceState.putSerializable("userInfos", (Serializable) signCalendarReq);
         //模拟传值
 
         //接收传递过来的数据
-        final SignCalendarReq signCalendarReq = (SignCalendarReq) getActivity().getIntent().getSerializableExtra("userInfos");
+        //final SignCalendarReq signCalendarReq = (SignCalendarReq) getActivity().getIntent().getSerializableExtra("userInfos");
+        //System.out.println("init_seq: " + signCalendarReq.getData().getUid() + ", " + signCalendarReq.getData().getSignDay() + "," + signCalendarReq.getData().getIsSign());
 
         //获取当前的月份
         month = Calendar.getInstance().get(Calendar.MONTH);
@@ -90,7 +100,7 @@ public class CalendarFragment extends Fragment {
         Date curDate = new Date(System.currentTimeMillis());
         date = formatter.format(curDate);
 
-        calendar = (SignCalendar) contentView.findViewById(R.id.sc_main);  //com.silence.signcalendar.SignCalendar
+        calendar = (SignCalendar) contentView.findViewById(R.id.sc_main);
         btn_sign = (TextView) contentView.findViewById(R.id.btn_sign);
         tv_sign_year_month = (TextView) contentView.findViewById(R.id.tv_sign_year_month);
         rlGetGiftData = (RelativeLayout) contentView.findViewById(R.id.rl_get_gift_view);
@@ -105,11 +115,16 @@ public class CalendarFragment extends Fragment {
         tv_sign_year_month.setText(year + "年" + (month + 1) + "月");
 
         if (signCalendarReq != null) {
+            //System.out.println("signCalendarReq is not null");
             if (signCalendarReq.getState().getCode() == 1) {//1成功，0失败
+                //System.out.println("signCalendarReq.getState().getCode()为1，成功");
+
                 dataBean = signCalendarReq.getData();
                 //获取当月已签到的日期
                 String signDay = dataBean.getSignDay();
                 String[] splitDay = signDay.split(",");
+
+                //System.out.println("已签到日期: " + signDay);
 
                 //list中存储的格式为2019-06-02
                 for (int i = 0; i < splitDay.length; i++) {
@@ -141,7 +156,13 @@ public class CalendarFragment extends Fragment {
                     btn_sign.setText("签 到");
                 }
             }
+            /*else{
+                System.out.println("signCalendarReq.getState().getCode()为0，失败");
+            }*/
         }
+        /*else{
+            System.out.println("signCalendarReq is null");
+        }*/
 
         btn_sign.setOnClickListener(new View.OnClickListener() {
 
@@ -185,7 +206,10 @@ public class CalendarFragment extends Fragment {
     }
 
     private void initData() {
+        //System.out.println("调用initData()方法");
         //模拟请求后台返回初始化数据
+
+        //SignCalendarReq local_signCalendarReq = new SignCalendarReq();
         signCalendarReq = new SignCalendarReq();
 
         SignCalendarReq.StateBean state = new SignCalendarReq.StateBean();
@@ -199,6 +223,9 @@ public class CalendarFragment extends Fragment {
         data.setSignDay("1,2");
         data.setUid("3347922");
         signCalendarReq.setData(data);
+
+        //System.out.println("init_seq: " + signCalendarReq.getData().getUid() + ", " + signCalendarReq.getData().getSignDay() + "," + signCalendarReq.getData().getIsSign());
+
     }
 
 
