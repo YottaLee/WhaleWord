@@ -67,6 +67,7 @@ public class SDUtil {
                 boolean newFile = file.createNewFile();
             }
             FileOutputStream output = new FileOutputStream(filename, true);
+            content += ",";
             output.write(content.getBytes());
             //将String字符串以字节流的形式写入到输出流中
             output.close();
