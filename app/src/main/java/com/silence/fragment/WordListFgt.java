@@ -14,11 +14,15 @@ import android.widget.ListView;
 
 import com.andraskindler.quickscroll.QuickScroll;
 import com.silence.adapter.WordAdapter;
+import com.silence.dao.Utils;
 import com.silence.dao.WordDao;
 import com.silence.pojo.Word;
+import com.silence.pojo.WordLast;
 import com.silence.utils.Const;
 import com.silence.word.R;
+import org.json.JSONException;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -51,7 +55,15 @@ public class WordListFgt extends Fragment implements AdapterView.OnItemClickList
         QuickScroll quickScroll = (QuickScroll) view.findViewById(R.id.quickscroll);
         WordDao wordDao = new WordDao(getActivity());
         Bundle bundle = getArguments();
-        List<Word> wordList = wordDao.getWords(bundle.getString(Const.META_KEY), bundle.getInt(Const.UNIT_KEY));
+        Utils utils = new Utils();
+        List<Word> wordList = null;//twordDao.getWords(bundle.getString(Const.META_KEY), bundle.getInt(Const.UNIT_KEY));
+        try {
+            wordList = utils.getJsonWords();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         WordAdapter wordAdapter = new WordAdapter(getActivity(), wordList);
         listView.setAdapter(wordAdapter);
         listView.setOnItemClickListener(this);

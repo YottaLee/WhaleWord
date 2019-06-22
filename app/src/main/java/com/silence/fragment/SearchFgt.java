@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.silence.adapter.CommonAdapter;
 import com.silence.pojo.Word;
+import com.silence.pojo.WordLast;
 import com.silence.utils.Const;
 import com.silence.word.R;
 
@@ -42,9 +43,9 @@ public class SearchFgt extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCommonAdapter = new CommonAdapter<Word>(null, R.layout.item_word) {
+        mCommonAdapter = new CommonAdapter<WordLast>(null, R.layout.item_word) {
             @Override
-            public void bindView(ViewHolder holder, Word obj) {
+            public void bindView(ViewHolder holder, WordLast obj) {
                 holder.setText(R.id.tv_item_word, obj.getKey());
             }
         };
@@ -57,8 +58,8 @@ public class SearchFgt extends ListFragment {
         mOnSearchClickListener = null;
     }
 
-    public void refresh(List<Word> wordList) {
-        mCommonAdapter.setData(wordList);
+    public void refresh(List<WordLast> wordLastList) {
+        mCommonAdapter.setData(wordLastList);
     }
 
     @Override

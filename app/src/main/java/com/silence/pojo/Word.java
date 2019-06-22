@@ -2,77 +2,73 @@ package com.silence.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.silence.enums.Label;
 
-/**
- * Created by Autumn on 2019/6/8 0008.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Word implements Parcelable {
-    //Word_Id, Word_Key, Word_Phono, Word_Trans, Word_Example, Word_Unit;
-    private int mId;
-    private String mKey;
-    private String mPhono;
-    private String mTrans;
-    private String mExample;
-    private int mUnit;
 
-    public Word() {
+    private int mid;
+    private String mkey;
+    private List<Trans> mtranslist;
+    private List<Label> labels;
+
+    public Word(int mid, String mkey, List<Trans> mtranslist) {
+        this.mid = mid;
+        this.mkey = mkey;
+        this.mtranslist = mtranslist;
+        labels = new ArrayList<>();
     }
 
-    public Word(int id, String key, String phono, String trans, String example, int unit) {
-        mId = id;
-        mKey = key;
-        mPhono = phono;
-        mTrans = trans;
-        mExample = example;
-        mUnit = unit;
+    /**
+     * 掌握该单词
+     */
+    public void handle(){
+        if(!labels.contains(Label.Studied))
+            labels.add(Label.Studied);
+        if(!labels.contains(Label.Handled)) {
+            if(labels.contains(Label.Unfamiliar))
+                labels.remove(Label.Unfamiliar);
+            labels.add(Label.Handled);
+        }
     }
 
-    public int getId() {
-        return mId;
+    /**
+     * 忘记该单词
+     */
+    public void forget(){
+        if(!labels.contains(Label.Studied))
+            labels.add(Label.Studied);
+        if(!labels.contains(Label.Unfamiliar)) {
+            if(labels.contains(Label.Handled))
+                labels.remove(Label.Handled);
+            labels.add(Label.Unfamiliar);
+        }
     }
 
-    public void setId(int id) {
-        mId = id;
+    public int getMid() {
+        return mid;
     }
 
-    public String getKey() {
-        return mKey;
+    public void setMid(int mid) {
+        this.mid = mid;
     }
 
-    public void setKey(String key) {
-        mKey = key;
+    public String getMkey() {
+        return mkey;
     }
 
-    public String getPhono() {
-        return mPhono;
+    public void setMkey(String mkey) {
+        this.mkey = mkey;
     }
 
-    public void setPhono(String phono) {
-        mPhono = phono;
+    public List<Trans> getMtranslist() {
+        return mtranslist;
     }
 
-    public String getTrans() {
-        return mTrans;
-    }
-
-    public void setTrans(String trans) {
-        mTrans = trans;
-    }
-
-    public String getExample() {
-        return mExample;
-    }
-
-    public void setExample(String example) {
-        mExample = example;
-    }
-
-    public int getUnit() {
-        return mUnit;
-    }
-
-    public void setUnit(int unit) {
-        mUnit = unit;
+    public void setMtranslist(List<Trans> mtranslist) {
+        this.mtranslist = mtranslist;
     }
 
     @Override
@@ -80,26 +76,26 @@ public class Word implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.mId);
-        dest.writeString(this.mKey);
-        dest.writeString(this.mPhono);
-        dest.writeString(this.mTrans);
-        dest.writeString(this.mExample);
-        dest.writeInt(this.mUnit);
-    }
-
     protected Word(Parcel in) {
-        this.mId = in.readInt();
-        this.mKey = in.readString();
-        this.mPhono = in.readString();
-        this.mTrans = in.readString();
-        this.mExample = in.readString();
-        this.mUnit = in.readInt();
+        this.mid = in.readInt();
+        this.mkey = in.readString();
+        this.mtranslist = new ArrayList<Trans>();
+        in.readList(mtranslist, Trans.class.getClassLoader());
+//        this.mtranslist = in.readList(mtranslist, Trans.CREATOR );
+
     }
 
-    public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeInt(this.mid);
+        parcel.writeString(this.mkey);
+        parcel.writeList(this.mtranslist);
+//        parcel.writeList(this.mtranslist);
+    }
+
+    public static final Creator<Word> CREATOR = new Creator<Word>() {
+
         public Word createFromParcel(Parcel source) {
             return new Word(source);
         }
