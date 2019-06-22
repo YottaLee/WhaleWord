@@ -19,11 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.silence.fragment.CalendarFragment;
 import com.silence.fragment.DicFragment;
+import com.silence.fragment.MainFragment;
 import com.silence.fragment.OriginalFragment;
 import com.silence.fragment.TabContentFragment;
-import com.silence.signcalendar.I8ShowSignCalendarActivity;
-import com.silence.signcalendar.SignCalendarReq;
 import com.silence.utils.Const;
 import com.silence.word.R;
 
@@ -43,10 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Fragment> tabFragments;
     private ContentPagerAdapter contentAdapter;
 
-    //sign_calendar
-    private TextView signBtn;
-    private SignCalendarReq signCalendarReq;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,19 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initContent();
         initTab();
-
-        /*
-        //sign_calendar
-        setContentView(R.layout.activity_main);
-        findViewById(R.id.iv_cet4).setOnClickListener(this);
-        findViewById(R.id.iv_cet6).setOnClickListener(this);
-        findViewById(R.id.iv_gre).setOnClickListener(this);
-        findViewById(R.id.iv_ietsl).setOnClickListener(this);
-        findViewById(R.id.iv_nmet).setOnClickListener(this);
-
-        signBtn = (TextView) findViewById(R.id.text_sign_calendar);
-        initData();
-        initListener();*/
 
     }
 
@@ -138,9 +121,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabIndicators = new ArrayList<>();
         tabIndicators.add("主页");
         tabIndicators.add("词库");
+        tabIndicators.add("日历");
         tabFragments = new ArrayList<>();
-        tabFragments.add(OriginalFragment.newInstance());
+        tabFragments.add(MainFragment.newInstance());
         tabFragments.add(DicFragment.newInstance());
+        tabFragments.add(CalendarFragment.newInstance());
         contentAdapter = new ContentPagerAdapter(getSupportFragmentManager());
         mContentVp.setAdapter(contentAdapter);
     }
@@ -165,38 +150,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public CharSequence getPageTitle(int position) {
             return tabIndicators.get(position);
         }
-    }
-
-    //sign_calendar
-    private void initData() {
-        //模拟请求后台返回初始化数据
-        signCalendarReq = new SignCalendarReq();
-
-        SignCalendarReq.StateBean state = new SignCalendarReq.StateBean();
-        state.setCode(1);
-        state.setMsg("成功");
-        signCalendarReq.setState(state);
-
-        SignCalendarReq.DataBean data = new SignCalendarReq.DataBean();
-        data.setConSign(1);
-        data.setIsSign(0);
-        data.setSignDay("1,2");
-        data.setUid("3347922");
-        signCalendarReq.setData(data);
-    }
-
-    private void initListener() {
-        signBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentSign = new Intent(MainActivity.this, I8ShowSignCalendarActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("userInfos", (Serializable) signCalendarReq);
-                intentSign.putExtras(bundle);
-                intentSign.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intentSign);
-            }
-        });
     }
 
 }
