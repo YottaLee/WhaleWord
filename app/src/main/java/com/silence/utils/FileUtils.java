@@ -4,15 +4,13 @@ import android.content.Context;
 
 import com.silence.word.R;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * Created by Autumn on 2019/6/11 0011.
  */
 public class FileUtils {
+    public static final String PREFIX_PATH = "";
     private FileUtils() {
     }
 
@@ -49,5 +47,74 @@ public class FileUtils {
                 }
             }
         }
+    }
+
+    public static boolean writeFile(String fileName, String content) {
+
+        try {
+            String filePath = PREFIX_PATH + fileName;
+            File file = new File(filePath);
+            String mkdirPath = PREFIX_PATH + fileName.split("/")[0];
+
+            File mkfirFile = new File(mkdirPath);
+            if(!mkfirFile.exists())
+                mkfirFile.mkdir();
+            if (!file.exists())
+                file.createNewFile();
+            FileWriter writer = new FileWriter(file, true);
+            PrintWriter printWriter = new PrintWriter(writer);
+            printWriter.write(content);
+            printWriter.println();
+            writer.close();
+            printWriter.close();
+
+            return true;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public static String readFile(Context context, String fileName) {
+        String content = "";
+        try {
+            System.out.println(fileName);
+            InputStream inputStream;
+            if (fileName.equals("day")) {
+                inputStream = context.getResources().openRawResource(R.raw.day);
+            } else if (fileName.equals("word")) {
+                inputStream = context.getResources().openRawResource(R.raw.word);
+            } else  {
+                inputStream = context.getResources().openRawResource(R.raw.today);
+            }
+
+            content = getString(inputStream);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return content;
+    }
+
+    public static String getString(InputStream inputStream) {
+        InputStreamReader inputStreamReader = null;
+        try {
+            inputStreamReader = new InputStreamReader(inputStream, "gbk");
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(inputStreamReader);
+        StringBuffer sb = new StringBuffer("");
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 }
