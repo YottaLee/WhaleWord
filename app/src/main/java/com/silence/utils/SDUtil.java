@@ -30,7 +30,7 @@ public class SDUtil {
     }
 
     //往SD卡写入文件的方法
-    public void savaFileToSD(String filename, String content) throws Exception {
+    public void saveFileToSD(String filename, String content) throws Exception {
         //如果手机已插入sd卡,且app具有读写sd卡的权限
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             filename = Environment.getExternalStorageDirectory().getCanonicalPath() + "/" + filename;
@@ -51,6 +51,29 @@ public class SDUtil {
             //关闭输出流
         } else Toast.makeText(context, "SD卡不存在或者不可读写", Toast.LENGTH_SHORT).show();
     }
+
+    public void appendFileToSD(String filename, String content) throws Exception {
+        //如果手机已插入sd卡,且app具有读写sd卡的权限
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            filename = Environment.getExternalStorageDirectory().getCanonicalPath() + "/" + filename;
+            //这里就不要用openFileOutput了,那个是往手机内存中写数据的
+            File file = new File(filename);
+            String dirPath = Environment.getExternalStorageDirectory().getCanonicalPath() + "/";
+            File dir = new File(dirPath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            if (!file.exists()) {
+                boolean newFile = file.createNewFile();
+            }
+            FileOutputStream output = new FileOutputStream(filename, true);
+            output.write(content.getBytes());
+            //将String字符串以字节流的形式写入到输出流中
+            output.close();
+            //关闭输出流
+        } else Toast.makeText(context, "SD卡不存在或者不可读写", Toast.LENGTH_SHORT).show();
+    }
+
 
     //读取SD卡中文件的方法
     //定义读取文件的方法:
