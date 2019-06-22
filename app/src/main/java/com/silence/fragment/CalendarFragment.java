@@ -4,6 +4,7 @@ package com.silence.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -35,10 +36,11 @@ import java.util.List;
 public class CalendarFragment extends Fragment {
 
     private View.OnClickListener listener;
+    private static boolean isShown;
 
     private SignCalendar calendar;
     private String date;
-    private TextView btn_sign;
+    //private TextView btn_sign;
     private TextView tv_sign_year_month;
     private SignCalendarReq signCalendarReq;
     private SignCalendarReq.DataBean dataBean;
@@ -50,7 +52,7 @@ public class CalendarFragment extends Fragment {
     private ImageView ivSun;
     private ImageView ivSunBg;
     private RelativeLayout rlQuedingBtn;
-    private RelativeLayout rlBtnSign;
+    //private RelativeLayout rlBtnSign;
     private ImageView signBack;
     private boolean isSign;
 
@@ -58,6 +60,9 @@ public class CalendarFragment extends Fragment {
         Bundle arguments = new Bundle();
         CalendarFragment tabContentFragment = new CalendarFragment();
         tabContentFragment.setArguments(arguments);
+
+        isShown = false;
+        System.out.println("调用一次:Calendar fragment newInstance()方法");
 
         return tabContentFragment;
     }
@@ -103,7 +108,7 @@ public class CalendarFragment extends Fragment {
         date = formatter.format(curDate);
 
         calendar = (SignCalendar) contentView.findViewById(R.id.sc_main);
-        btn_sign = (TextView) contentView.findViewById(R.id.btn_sign);
+        //btn_sign = (TextView) contentView.findViewById(R.id.btn_sign);
         tv_sign_year_month = (TextView) contentView.findViewById(R.id.tv_sign_year_month);
         rlGetGiftData = (RelativeLayout) contentView.findViewById(R.id.rl_get_gift_view);
         tvGetSunValue = (TextView) contentView.findViewById(R.id.tv_text_one);
@@ -111,16 +116,13 @@ public class CalendarFragment extends Fragment {
         ivSunBg = (ImageView) contentView.findViewById(R.id.iv_sun_bg);
         signBack = (ImageView) contentView.findViewById(R.id.i8show_attention_back);
         rlQuedingBtn = (RelativeLayout) contentView.findViewById(R.id.rl_queding_btn);
-        rlBtnSign = (RelativeLayout) contentView.findViewById(R.id.rl_btn_sign);
+        //rlBtnSign = (RelativeLayout) contentView.findViewById(R.id.rl_btn_sign);
 
         //设置当前日期
         tv_sign_year_month.setText(year + "年" + (month + 1) + "月");
 
         if (signCalendarReq != null) {
-            //System.out.println("signCalendarReq is not null");
             if (signCalendarReq.getState().getCode() == 1) {//1成功，0失败
-                //System.out.println("signCalendarReq.getState().getCode()为1，成功");
-
                 dataBean = signCalendarReq.getData();
                 //获取当月已签到的日期
                 String signDay = dataBean.getSignDay();
@@ -147,26 +149,43 @@ public class CalendarFragment extends Fragment {
                 }
 
 
+                //给当月已签到日期加上标记
                 calendar.addMarks(list, 0);
 
-                if (dataBean.getIsSign() == 1) {//1是已签到，0是未签到
+                //若检测到今天已打卡，则“可”弹出提示框（一次？）
+                if(isShown == false && isSign == true){
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            signCalendarData();
+                            isShown = true;
+                        }
+                    }, 400);
+                    //signCalendarData();
+                }
+                else if(isShown == true && isSign == true){
+                    System.out.println("已显示过完成任务提示");
+                }
+                else if(isShown == false && isSign == false){
+                    System.out.println("未完成任务，未显示过提示");
+                }
+                else if(isShown == true && isSign == false){
+                    System.out.println("可能发生了错误的提示显示");
+                }
+
+
+                /*if (dataBean.getIsSign() == 1) {//1是已签到，0是未签到
                     rlBtnSign.setBackgroundResource(R.drawable.btn_sign_calendar_no);
                     btn_sign.setText("已签到");
                     rlBtnSign.setClickable(false);
                 } else {
                     rlBtnSign.setBackgroundResource(R.drawable.btn_sign_calendar);
                     btn_sign.setText("签 到");
-                }
+                }*/
             }
-            /*else{
-                System.out.println("signCalendarReq.getState().getCode()为0，失败");
-            }*/
         }
-        /*else{
-            System.out.println("signCalendarReq is null");
-        }*/
 
-        btn_sign.setOnClickListener(new View.OnClickListener() {
+        /*btn_sign.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -175,7 +194,7 @@ public class CalendarFragment extends Fragment {
                 }
 
             }
-        });
+        });*/
 
         rlQuedingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,13 +301,26 @@ public class CalendarFragment extends Fragment {
     private void signCalendarData() {
         //模拟请求后台数据签到已成功
 
+
         rlGetGiftData.setVisibility(View.VISIBLE);
-        rlBtnSign.setBackgroundResource(R.drawable.btn_sign_calendar_no);
-        btn_sign.setText("已签到");
-        isSign = true;//模拟当天已签到
+        //rlBtnSign.setBackgroundResource(R.drawable.btn_sign_calendar_no);
+
+
+        /*btn_sign.setText("已签到");
+        isSign = true;//模拟当天已签到*/
+
+        /*String text = "暂无今日数据";
+        if(isSign){
+            text = "恭喜获得10个阳光值";
+        }
+        else{
+            text = "完成任务再来打卡吧";
+        }*/
+
+        String text = "恭喜你已完成今日计划";
 
         ivSun.setImageResource(R.drawable.i8live_sun);
-        tvGetSunValue.setText("恭喜获得10个阳光值");
+        tvGetSunValue.setText(text);
 
         Animation operatingAnim = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_anim_online_gift);
         LinearInterpolator lin = new LinearInterpolator();

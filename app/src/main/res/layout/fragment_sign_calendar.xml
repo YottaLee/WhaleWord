@@ -68,7 +68,7 @@
         android:clickable="true"/>
 
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:id="@+id/rl_btn_sign"
         android:layout_width="135dp"
         android:layout_height="49dp"
@@ -88,7 +88,7 @@
             android:text="签 到"
             android:textColor="#fff"
             android:textSize="17sp" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <RelativeLayout
         android:id="@+id/rl_get_gift_view"
