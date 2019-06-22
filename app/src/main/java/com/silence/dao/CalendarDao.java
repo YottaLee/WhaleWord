@@ -1,11 +1,16 @@
 package com.silence.dao;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
+import com.silence.utils.Const;
 import com.silence.utils.FileUtils;
 import com.silence.word.R;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,5 +60,28 @@ public class CalendarDao {
             }
         }
         return res.substring(0, res.length() - 1);
+    }
+
+
+    public void punch(Context context) {
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
+        System.out.println(currentDate);
+
+       Uri uri= Uri.parse("android.resource://com.silence.word/" + R.raw.calendar);
+
+        InputStream inputStream = context.getResources().openRawResource(R.raw.calendar);
+
+        try {
+            File calendarFile = new File(String.valueOf(uri));
+            FileWriter fileWriter = new FileWriter(calendarFile, true);
+            fileWriter.write(currentDate);
+            fileWriter.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 }
