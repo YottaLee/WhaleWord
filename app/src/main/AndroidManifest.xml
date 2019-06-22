@@ -52,6 +52,11 @@
                 android:supportsRtl="true"
                 android:name="com.silence.activity.CountActivity"
                   android:screenOrientation="portrait"></activity>
+        <activity
+                android:name="com.silence.activity.PlanActivity"
+                android:screenOrientation="portrait"
+        >
+        </activity>
     </application>
 
 </manifest>

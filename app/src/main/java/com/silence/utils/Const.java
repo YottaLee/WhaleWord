@@ -13,10 +13,10 @@ public interface Const {
     String WORDS_CET6 = "TABLE_CET6";
     String WORDS_IETSL = "TABLE_IETSL";
     String WORDS_GRE = "TABLE_GRE";
-    String DIC_ALL = "DIC_ALL";
-    String DIC_STUDIED = "DIC_STUDIED";
-    String DIC_UNFAMILIAR = "DIC_UNFAMILIAR";
-    String DIC_HANDLED = "DIC_HANDLED";
+    String DIC_ALL = "全部单词";
+    String DIC_STUDIED = "已学词";
+    String DIC_UNFAMILIAR = "生词本";
+    String DIC_HANDLED = "已掌握";
     String SP_KEY = "exist";
     String DB_NAME = "words.db";
     String DB_DIR = "databases";
