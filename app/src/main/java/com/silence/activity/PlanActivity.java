@@ -131,7 +131,7 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         long endTime = mSelectedTime.getTimeInMillis();
         Date date = new Date(endTime);
         System.out.println(simpleDateFormat.format(date));
-        tEndDate.setText(simpleDateFormat.format(date));
+//        tEndDate.setText(simpleDateFormat.format(date));
         long startTime = DateFormatUtils.str2Long(simpleDateFormat.format(new Date()), false);
         if (!tCurrentDate.getText().equals(Const.TODAY))
             startTime = DateFormatUtils.str2Long(tCurrentDate.getText().toString(), false);
@@ -145,13 +145,6 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         long studyMinute = Math.min(newWord + reviewWord, Const.SUM_WORDS) / 2;
         tStudyMinute.setText(String.valueOf(studyMinute));
     }
-
-    public void confirmDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(mSelectedTime.getTimeInMillis());
-//        tEndDate.setText(simpleDateFormat.format(date));
-    }
-
 
     @Override
     public void onClick(View view) {
