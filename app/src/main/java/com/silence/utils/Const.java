@@ -17,9 +17,11 @@ public interface Const {
     String DIC_STUDIED = "已学词";
     String DIC_UNFAMILIAR = "生词本";
     String DIC_HANDLED = "已掌握";
+    String TODAY = "今天";
     String SP_KEY = "exist";
     String DB_NAME = "words.db";
     String DB_DIR = "databases";
+    int SUM_WORDS = 3066;
     long DELAY_TIME = 1000;
     String PLAY_SPEED = "play_speed";
     String AUTO_SPEAK = "auto_speak";
