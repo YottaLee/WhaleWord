@@ -1,14 +1,21 @@
 package com.silence.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.silence.studyplan.DateFormatUtils;
 import com.silence.studyplan.PickerView;
+import com.silence.utils.Const;
 import com.silence.word.R;
 
 import java.text.DecimalFormat;
@@ -18,10 +25,15 @@ import java.util.*;
 /**
  * Created by Autumn on 2019/6/22
  */
-public class PlanActivity extends AppCompatActivity implements PickerView.OnSelectListener {
-    private LinearLayout ll_date;
-    private TextView currentDate;
-//    private TextView endDate;
+public class PlanActivity extends AppCompatActivity implements PickerView.OnSelectListener, View.OnClickListener {
+    private TextView tCurrentDate;
+    private TextView tEndDate;
+    private TextView tStudyDay;
+    private TextView tNewWord;
+    private TextView tReviewWord;
+    private TextView tStudyMinute;
+    private Button btnConfirm;
+//    private TextView tEndDate;
 
     private Calendar mBeginTime, mEndTime, mSelectedTime;
 
@@ -63,12 +75,35 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+
         }
         setTitle("单词计划");
-        ll_date = (LinearLayout) findViewById(R.id.ll_date);
-        currentDate = (TextView) findViewById(R.id.tv_current_date);
-        currentDate.setText("今天");
-//        endDate = (TextView) findViewById(R.id.tv_selected_date);
+        initPlan();
+        initView();
+        initData();
+        setCanShowPreciseTime(false);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_reset, menu);
+        return true;
+    }
+
+    private void initPlan() {
+        tStudyDay = (TextView) findViewById(R.id.tv_study_day);
+        tNewWord = (TextView) findViewById(R.id.tv_newword_num);
+        tReviewWord = (TextView) findViewById(R.id.tv_review_num);
+        tStudyMinute = (TextView) findViewById(R.id.tv_study_minute);
+        btnConfirm = (Button) findViewById(R.id.btn_plan_confirm);
+        btnConfirm.setOnClickListener(this);
+    }
+
+    private void initView() {
+        tEndDate = (TextView) findViewById(R.id.tv_end_date);
+        tCurrentDate = (TextView) findViewById(R.id.tv_current_date);
+        tCurrentDate.setText(Const.TODAY);
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
         mBeginTime = Calendar.getInstance();
@@ -76,13 +111,7 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         mEndTime = Calendar.getInstance();
         mEndTime.setTimeInMillis(DateFormatUtils.str2Long("2030-01-01 00:00", true));
         mSelectedTime = Calendar.getInstance();
-        initView();
-        initData();
-        setCanShowPreciseTime(false);
-        setScrollLoop(false);
-    }
 
-    private void initView() {
         mTvHourUnit = (TextView) findViewById(R.id.tv_hour_unit);
         mTvMinuteUnit = (TextView) findViewById(R.id.tv_minute_unit);
         mDpvYear = (PickerView) findViewById(R.id.dpv_year);
@@ -97,10 +126,42 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         mDpvMinute.setOnSelectListener(this);
     }
 
-    public void confirmDate(){
+    private void changeTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long endTime = mSelectedTime.getTimeInMillis();
+        Date date = new Date(endTime);
+        System.out.println(simpleDateFormat.format(date));
+        tEndDate.setText(simpleDateFormat.format(date));
+        long startTime = DateFormatUtils.str2Long(simpleDateFormat.format(new Date()), false);
+        if (!tCurrentDate.getText().equals(Const.TODAY))
+            startTime = DateFormatUtils.str2Long(tCurrentDate.getText().toString(), false);
+        long studyDay = Math.max((endTime - startTime) / (1000 * 60 * 60 * 24), 1);
+        tStudyDay.setText(String.valueOf(studyDay));
+        int studiedWords = 0;//已经学习了的词，调接口
+        long newWord = (Const.SUM_WORDS - studiedWords) / studyDay;
+        tNewWord.setText(String.valueOf(newWord));
+        long reviewWord = Math.min(3 * newWord, Const.SUM_WORDS);
+        tReviewWord.setText(String.valueOf(reviewWord));
+        long studyMinute = Math.min(newWord + reviewWord, Const.SUM_WORDS) / 2;
+        tStudyMinute.setText(String.valueOf(studyMinute));
+    }
+
+    public void confirmDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(mSelectedTime.getTimeInMillis());
-//        endDate.setText(simpleDateFormat.format(date));
+//        tEndDate.setText(simpleDateFormat.format(date));
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.btn_plan_confirm:
+                intent.setClass(this, MainActivity.class);
+                break;
+        }
+        startActivity(intent);
     }
 
 
@@ -142,6 +203,7 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
                 mSelectedTime.set(Calendar.MINUTE, timeUnit);
                 break;
         }
+        changeTime();
     }
 
     private void initData() {
@@ -519,5 +581,18 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         mDpvMinute.setCanShowAnim(canShowAnim);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.menu_item_reset:
+                tCurrentDate.setText(Const.TODAY);
+                changeTime();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
