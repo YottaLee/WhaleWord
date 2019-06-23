@@ -65,6 +65,11 @@ public class SDUtil {
             }
             if (!file.exists()) {
                 boolean newFile = file.createNewFile();
+                FileOutputStream output = new FileOutputStream(filename, true);
+                String preData = "2019-06-19, 2019-06-20, 2019-06-21, 2019-06-22";
+                output.write(preData.getBytes());
+                output.close();
+
             }
             FileOutputStream output = new FileOutputStream(filename, true);
             content += ",";
