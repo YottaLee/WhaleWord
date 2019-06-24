@@ -195,6 +195,7 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
                 break;
         }
         startActivity(intent);
+        
     }
 
 
