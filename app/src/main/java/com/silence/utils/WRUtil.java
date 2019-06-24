@@ -14,6 +14,7 @@ public class WRUtil {
     private final static String TODAY_NAME = "today.txt";
     private final static String WORD_NAME = "word.txt";
     private final static String CALENDAR_NAME = "calendar.txt";
+    private final static String PLAN_NAME = "plan.txt";
 
 
 
