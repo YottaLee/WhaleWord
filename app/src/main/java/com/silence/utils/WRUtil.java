@@ -10,34 +10,10 @@ import com.silence.enums.RecordType;
  */
 public class WRUtil {
 
-    private final static String DAY_NAME = "day.txt";
-    private final static String TODAY_NAME = "today.txt";
-    private final static String WORD_NAME = "word.txt";
-    private final static String CALENDAR_NAME = "calendar.txt";
-    private final static String PLAN_NAME = "plan.txt";
-
-
     public void writeFile(Context context, String content, RecordType type) {
         SDUtil sdUtil = new SDUtil(context);
-        String fileName = "";
+        String fileName = type.getPath();
         try {
-            switch (type) {
-                case DAY:
-                    fileName = DAY_NAME;
-                    break;
-                case WORD:
-                    fileName = WORD_NAME;
-                    break;
-                case TODAY:
-                    fileName = TODAY_NAME;
-                    break;
-                case CALENDAR:
-                    fileName = CALENDAR_NAME;
-                    break;
-                case PLAN:
-                    fileName = PLAN_NAME;
-                    break;
-            }
             if (type.equals(RecordType.CALENDAR)) {
                 sdUtil.appendFileToSD(fileName, content);
                 //   sdUtil.saveFileToSD(fileName, content);

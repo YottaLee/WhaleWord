@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.silence.enums.RecordType;
 import com.silence.studyplan.DateFormatUtils;
 import com.silence.studyplan.PickerView;
 import com.silence.utils.Const;
@@ -86,7 +87,7 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         SDUtil sdUtil = new SDUtil();
         String content = "";
         try {
-            content = sdUtil.readFromSD("plan.txt");
+            content = sdUtil.readFromSD(RecordType.PLAN.getPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -189,7 +190,7 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         switch (view.getId()) {
             case R.id.btn_plan_confirm:
                 WRUtil wrUtil = new WRUtil();
-                wrUtil.writeFile(this,"","pl");
+                wrUtil.writeFile(this,"", RecordType.PLAN);
                 intent.setClass(this, MainActivity.class);
                 break;
         }
