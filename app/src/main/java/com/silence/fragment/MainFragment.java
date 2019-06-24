@@ -29,6 +29,7 @@ import com.silence.utils.SDUtil;
 import com.silence.utils.WRUtil;
 import com.silence.word.R;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,23 +101,21 @@ public class MainFragment extends Fragment {
         initListener();
         btn_xueci.setOnClickListener(listener);
 
-        WRUtil wrUtil = new WRUtil();
         SDUtil sdUtil = new SDUtil(getContext());
+        WRUtil wrUtil = new WRUtil();
         /**
          * 这个try先执行一次，然后注释掉
          */
-        try {
-            sdUtil.saveFileToSD("calendar.txt","");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /**
-         * 然后注释完上面的，把下面四行跑一次在注释掉就好了
-         */
-//        wrUtil.writeFile(getContext(), "2019-06-19", RecordType.CALENDAR);
-//        wrUtil.writeFile(getContext(), "2019-06-20", RecordType.CALENDAR);
-//        wrUtil.writeFile(getContext(), "2019-06-21", RecordType.CALENDAR);
-//        wrUtil.writeFile(getContext(), "2019-06-22", RecordType.CALENDAR);
+
+//        try {
+//            sdUtil.saveFileToSD(RecordType.CALENDAR.getPath(),"");
+//            sdUtil.saveFileToSD(RecordType.WORD.getPath(),"");
+//        } catch (Exception e) {
+//            System.out.println("ERROR1");
+//            e.printStackTrace();
+//        }
+        sdUtil.initFile();
+
 //        try {
 //            String res = sdUtil.readFromSD("calendar.txt");
 //            System.out.println(res);

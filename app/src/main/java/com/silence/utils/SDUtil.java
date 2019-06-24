@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
+import com.silence.enums.RecordType;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,6 +28,22 @@ public class SDUtil {
     public SDUtil(Context context) {
         super();
         this.context = context;
+    }
+
+    public void initFile() {
+        try {
+            WRUtil wrUtil = new WRUtil();
+            String calendar = readFromSD(RecordType.CALENDAR.getPath());
+            if (calendar == null || calendar.equals("")) {
+                wrUtil.writeFile(context, "2019-06-19", RecordType.CALENDAR);
+                wrUtil.writeFile(context, "2019-06-20", RecordType.CALENDAR);
+                wrUtil.writeFile(context, "2019-06-21", RecordType.CALENDAR);
+                wrUtil.writeFile(context, "2019-06-22", RecordType.CALENDAR);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //往SD卡写入文件的方法
@@ -105,7 +122,7 @@ public class SDUtil {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             "android.permission.READ_EXTERNAL_STORAGE",
-            "android.permission.WRITE_EXTERNAL_STORAGE" };
+            "android.permission.WRITE_EXTERNAL_STORAGE"};
 
 
     public void verifyStoragePermissions(Activity activity) {
@@ -116,7 +133,7 @@ public class SDUtil {
                     "android.permission.WRITE_EXTERNAL_STORAGE");
             if (permission != PackageManager.PERMISSION_GRANTED) {
                 // 没有写的权限，去申请写的权限，会弹出对话框
-                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();

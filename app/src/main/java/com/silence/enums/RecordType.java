@@ -6,7 +6,7 @@ package com.silence.enums;
  * @Version 1.0
  */
 public enum RecordType {
-    DAY("day.txt"), TODAY("today.txt"), CALENDAR("word.txt"), WORD("calendar.txt"), PLAN("plan.txt");
+    DAY("day.txt"), TODAY("today.txt"), CALENDAR("calendar.txt"), WORD("word.txt"), PLAN("plan.txt");
 
     private String path;
 

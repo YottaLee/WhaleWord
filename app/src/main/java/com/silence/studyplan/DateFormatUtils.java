@@ -58,4 +58,16 @@ public class DateFormatUtils {
         }
     }
 
+    public static int getFebDay(int year) {
+        return isLeapYear(year) ? 29 : 28;
+    }
+
+    private static boolean isLeapYear(int year) {  //创建boolean类型的方法
+        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {  //平闰年判断算法
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -318,6 +318,32 @@ public class PickerView extends View {
         invalidate();
     }
 
+    public void setSelectedValue(int value) {
+        for (int index = 0; index < mDataList.size(); index++) {
+            if (mDataList.get(index).equals(String.valueOf(value))) {
+                mSelectedIndex = index;
+                if (mCanScrollLoop) {
+                    // 可循环滚动时，mSelectedIndex 值固定为 mDataList / 2
+                    int position = mDataList.size() / 2 - mSelectedIndex;
+                    if (position < 0) {
+                        for (int i = 0; i < -position; i++) {
+                            moveHeadToTail();
+                            mSelectedIndex--;
+                        }
+                    } else if (position > 0) {
+                        for (int i = 0; i < position; i++) {
+                            moveTailToHead();
+                            mSelectedIndex++;
+                        }
+                    }
+                }
+                invalidate();
+            }
+        }
+
+
+    }
+
     /**
      * 设置选择结果监听
      */

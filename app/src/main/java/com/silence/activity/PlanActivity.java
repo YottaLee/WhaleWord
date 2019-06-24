@@ -111,25 +111,24 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
     }
 
     private void getData(String beginDate, String endDate) {
-
         SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         String today = dateSdf.format(new Date());
         if (beginDate.equals("") || beginDate.equals(today))
             tCurrentDate.setText(Const.TODAY);
         else {
-
             tCurrentDate.setText(beginDate);
-            long startTime = DateFormatUtils.str2Long(beginDate, false);
-            long endTime = DateFormatUtils.str2Long(endDate, false);
-            long studyDay = Math.max((endTime - startTime) / (1000 * 60 * 60 * 24), 1);
-            tStudyDay.setText(String.valueOf(studyDay));
-            long newWord = (Const.SUM_WORDS - studiedWords) / studyDay;
-            tNewWord.setText(String.valueOf(newWord));
-            long reviewWord = Math.min(3 * newWord, Const.SUM_WORDS);
-            tReviewWord.setText(String.valueOf(reviewWord));
-            long studyMinute = Math.min(newWord + reviewWord, Const.SUM_WORDS) / 2;
-            tStudyMinute.setText(String.valueOf(studyMinute));
         }
+        long startTime = DateFormatUtils.str2Long(beginDate, false);
+        long endTime = DateFormatUtils.str2Long(endDate, false);
+        long studyDay = Math.max((endTime - startTime) / (1000 * 60 * 60 * 24), 1);
+        tStudyDay.setText(String.valueOf(studyDay));
+        long newWord = (Const.SUM_WORDS - studiedWords) / studyDay;
+        tNewWord.setText(String.valueOf(newWord));
+        long reviewWord = Math.min(3 * newWord, Const.SUM_WORDS);
+        tReviewWord.setText(String.valueOf(reviewWord));
+        long studyMinute = Math.min(newWord + reviewWord, Const.SUM_WORDS) / 2;
+        tStudyMinute.setText(String.valueOf(studyMinute));
+        setSelectedTime(endDate,false);
     }
 
     private void initPlan() {
@@ -142,11 +141,13 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
     }
 
     private void initView(String endDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+        System.out.println("current:" + endDate);
         tEndDate = (TextView) findViewById(R.id.tv_end_date);
         tCurrentDate = (TextView) findViewById(R.id.tv_current_date);
 
         mBeginTime = Calendar.getInstance();
-        mBeginTime.setTimeInMillis(DateFormatUtils.str2Long(endDate, true));
+        mBeginTime.setTimeInMillis(DateFormatUtils.str2Long(sdf.format(new Date()), true));
         mEndTime = Calendar.getInstance();
         mEndTime.setTimeInMillis(DateFormatUtils.str2Long("2030-01-01 00:00", true));
         mSelectedTime = Calendar.getInstance();
@@ -190,12 +191,16 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         switch (view.getId()) {
             case R.id.btn_plan_confirm:
                 WRUtil wrUtil = new WRUtil();
-                wrUtil.writeFile(this,"", RecordType.PLAN);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String beginDate = tCurrentDate.getText().toString();
+                if (beginDate.equals(Const.TODAY))
+                    beginDate = simpleDateFormat.format(new Date());
+                String endDate = simpleDateFormat.format(mSelectedTime.getTimeInMillis());
+                wrUtil.writeFile(this, beginDate + "," + endDate, RecordType.PLAN);
                 intent.setClass(this, MainActivity.class);
                 break;
         }
         startActivity(intent);
-        
     }
 
 
