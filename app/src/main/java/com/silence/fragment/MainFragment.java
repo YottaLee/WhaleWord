@@ -102,6 +102,17 @@ public class MainFragment extends Fragment {
 
         WRUtil wrUtil = new WRUtil();
         SDUtil sdUtil = new SDUtil(getContext());
+        /**
+         * 这个try先执行一次，然后注释掉
+         */
+        try {
+            sdUtil.saveFileToSD("calendar.txt","");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /**
+         * 然后注释完上面的，把下面四行跑一次在注释掉就好了
+         */
 //        wrUtil.writeFile(getContext(), "2019-06-19", RecordType.CALENDAR);
 //        wrUtil.writeFile(getContext(), "2019-06-20", RecordType.CALENDAR);
 //        wrUtil.writeFile(getContext(), "2019-06-21", RecordType.CALENDAR);
