@@ -1,12 +1,15 @@
 package com.silence.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.os.Environment;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -26,6 +29,7 @@ import com.silence.fragment.OriginalFragment;
 import com.silence.fragment.TabContentFragment;
 import com.silence.studyplan.PickerView;
 import com.silence.utils.Const;
+import com.silence.utils.SDUtil;
 import com.silence.word.R;
 
 import java.io.File;
@@ -33,7 +37,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
 
     private long exitTime = 0;
     private TabLayout mTabTl;
@@ -46,43 +50,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new SDUtil().verifyStoragePermissions(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation);
-
         mTabTl = (TabLayout) findViewById(R.id.tl_tab);
         mContentVp = (ViewPager) findViewById(R.id.vp_content);
 
         initContent();
         initTab();
 
-    }
-
-    @Override
-    public void onClick(View v) {
-//        Intent intent = new Intent();
-//        switch (v.getId()) {
-//            case R.id.iv_nmet:
-//                intent.setClass(this, UnitListActivity.class);
-//                intent.putExtra(Const.META_KEY, Const.WORDS_NMET);
-//                break;
-//            case R.id.iv_cet4:
-//                intent.setClass(this, UnitListActivity.class);
-//                intent.putExtra(Const.META_KEY, Const.WORDS_CET4);
-//                break;
-//            case R.id.iv_cet6:
-//                intent.setClass(this, UnitListActivity.class);
-//                intent.putExtra(Const.META_KEY, Const.WORDS_CET6);
-//                break;
-//            case R.id.iv_ietsl:
-//                intent.setClass(this, UnitListActivity.class);
-//                intent.putExtra(Const.META_KEY, Const.WORDS_IETSL);
-//                break;
-//            case R.id.iv_gre:
-//                intent.setClass(this, UnitListActivity.class);
-//                intent.putExtra(Const.META_KEY, Const.WORDS_GRE);
-//                break;
-//        }
-//        startActivity(intent);
     }
 
     @Override
