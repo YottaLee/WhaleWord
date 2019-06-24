@@ -36,6 +36,7 @@ public class WRUtil {
             }
             if (type.equals(RecordType.CALENDAR)) {
                 sdUtil.appendFileToSD(fileName, content);
+             //   sdUtil.saveFileToSD(fileName, content);
             } else {
                 sdUtil.saveFileToSD(fileName, content);
             }
