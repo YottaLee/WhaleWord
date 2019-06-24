@@ -18,9 +18,12 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import com.silence.activity.CountActivity;
+import com.silence.activity.DetailActivity;
 import com.silence.activity.PlanActivity;
+import com.silence.activity.WordListActivity;
 import com.silence.dao.CalendarDao;
 import com.silence.enums.RecordType;
+import com.silence.utils.Const;
 import com.silence.utils.FileUtils;
 import com.silence.utils.SDUtil;
 import com.silence.utils.WRUtil;
@@ -93,6 +96,10 @@ public class MainFragment extends Fragment {
         initListener();
         changePlan.setOnClickListener(listener);
 
+        Button btn_xueci = (Button) contentView.findViewById(R.id.btnExitSys);
+        initListener();
+        btn_xueci.setOnClickListener(listener);
+
         WRUtil wrUtil = new WRUtil();
         SDUtil sdUtil = new SDUtil(getContext());
 //        wrUtil.writeFile(getContext(), "2019-06-19", RecordType.CALENDAR);
@@ -121,6 +128,7 @@ public class MainFragment extends Fragment {
 //
 //        }
         return contentView;
+
     }
 
     /**
@@ -133,6 +141,11 @@ public class MainFragment extends Fragment {
                 switch (v.getId()) {
                     case R.id.plan_change:
                         intent.setClass(getActivity(), PlanActivity.class);
+                        break;
+                    case R.id.btnExitSys:
+                        intent.setClass(getActivity(), DetailActivity.class);
+                        intent.putExtra(Const.DIC_KEY, Const.DIC_UNFAMILIAR);
+                        System.out.println("I click xueci!");
                         break;
                 }
                 startActivity(intent);

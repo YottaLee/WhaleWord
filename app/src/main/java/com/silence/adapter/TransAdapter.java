@@ -85,11 +85,11 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
         }
         if(trans.getDerivative()!= null && !trans.getDerivative().isEmpty()&& trans.getDerivative().length() != 0 && trans.getDerivative()!= "null" && trans.getDerivative()!= ""){
             viewHolder.trans_derivative.setText("派："+trans.getDerivative());
-            System.out.println(3+"????"+trans.getDerivative());
+//            System.out.println(3+"????"+trans.getDerivative());
         }
         else{
             viewHolder.trans_derivative.setText(" ");
-            System.out.println(3+"!!!!!");
+//            System.out.println(3+"!!!!!");
         }
         return convertView;
     }
