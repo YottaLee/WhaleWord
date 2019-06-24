@@ -180,8 +180,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 //                }
 //                mViewPager.setCurrentItem(mWordKey);
                 Word currentword = mWordList.get(mWordKey);
-                currentword.forget();
-                System.out.println("forget");
+                currentword.forget();//改标签为陌生，currentword 是当前单词
+                System.out.println("forget");//TODO 需要把当前单词保存到陌生的单词列表，文件JSON
+                //TODO 把wordlist到SD卡
+                //TODO 写json util
+                //TODO 重写整个json
                 break;
 //            case R.id.tv_play:
 //                if (mIsPlaying) {
@@ -202,8 +205,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 mViewPager.setCurrentItem(mWordKey);
                 Word currentword2 = mWordList.get(mWordKey);
-                currentword2.handle();
-                System.out.println("Known");
+                currentword2.handle();//该标签为熟悉，currentword2 是当前单词
+                System.out.println("Known"); //TODO 需要把当前单词保存到熟悉的单词列表，文件JSON
+                //TODO 把wordlist到SD卡
+                //TODO 写json util
+                //TODO 重写整个json
                 break;
         }
     }
