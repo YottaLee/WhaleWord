@@ -50,6 +50,8 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
             mHourUnits = new ArrayList<>(), mMinuteUnits = new ArrayList<>();
     private DecimalFormat mDecimalFormat = new DecimalFormat("00");
 
+    private int studiedWords;//今日已学词
+
     private boolean mCanShowPreciseTime;
     private int mScrollUnits = SCROLL_UNIT_HOUR + SCROLL_UNIT_MINUTE;
 
@@ -89,12 +91,15 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
             e.printStackTrace();
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-        String now = sdf.format(new Date());
+        String endDate = sdf.format(new Date());
         String data[] = content.split(",");
+        studiedWords = 0;//已经学习了的词，调接口
         initPlan();
-        initView(data[1]);
+        if (data.length > 1)
+            endDate = data[1];
+        initView(endDate);
         initData();
-        getData(data[0]);
+        getData(data[0], endDate);
         setCanShowPreciseTime(false);
     }
 
@@ -104,24 +109,25 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         return true;
     }
 
-    private void getData(String beginDate){
+    private void getData(String beginDate, String endDate) {
 
         SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         String today = dateSdf.format(new Date());
-        if (beginDate.equals("")||beginDate.equals(today))
+        if (beginDate.equals("") || beginDate.equals(today))
             tCurrentDate.setText(Const.TODAY);
         else {
+
             tCurrentDate.setText(beginDate);
             long startTime = DateFormatUtils.str2Long(beginDate, false);
-//            long endTime = DateFormatUtils.str2Long(data[1], false);
-//            long studyDay = Math.max((endTime - startTime) / (1000 * 60 * 60 * 24), 1);
-//            tStudyDay.setText(String.valueOf(studyDay));
-//            long newWord = (Const.SUM_WORDS - Integer.parseInt(data[2])) / studyDay;
-//            tNewWord.setText(String.valueOf(newWord));
-//            long reviewWord = Math.min(3 * newWord, Const.SUM_WORDS);
-//            tReviewWord.setText(String.valueOf(data[2]));
-//            long studyMinute = Math.min(newWord + reviewWord, Const.SUM_WORDS) / 2;
-//            tStudyMinute.setText(String.valueOf(studyMinute));
+            long endTime = DateFormatUtils.str2Long(endDate, false);
+            long studyDay = Math.max((endTime - startTime) / (1000 * 60 * 60 * 24), 1);
+            tStudyDay.setText(String.valueOf(studyDay));
+            long newWord = (Const.SUM_WORDS - studiedWords) / studyDay;
+            tNewWord.setText(String.valueOf(newWord));
+            long reviewWord = Math.min(3 * newWord, Const.SUM_WORDS);
+            tReviewWord.setText(String.valueOf(reviewWord));
+            long studyMinute = Math.min(newWord + reviewWord, Const.SUM_WORDS) / 2;
+            tStudyMinute.setText(String.valueOf(studyMinute));
         }
     }
 
@@ -169,7 +175,6 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
             startTime = DateFormatUtils.str2Long(tCurrentDate.getText().toString(), false);
         long studyDay = Math.max((endTime - startTime) / (1000 * 60 * 60 * 24), 1);
         tStudyDay.setText(String.valueOf(studyDay));
-        int studiedWords = 0;//已经学习了的词，调接口
         long newWord = (Const.SUM_WORDS - studiedWords) / studyDay;
         tNewWord.setText(String.valueOf(newWord));
         long reviewWord = Math.min(3 * newWord, Const.SUM_WORDS);
@@ -183,6 +188,8 @@ public class PlanActivity extends AppCompatActivity implements PickerView.OnSele
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.btn_plan_confirm:
+                WRUtil wrUtil = new WRUtil();
+                wrUtil.writeFile(this,"","pl");
                 intent.setClass(this, MainActivity.class);
                 break;
         }

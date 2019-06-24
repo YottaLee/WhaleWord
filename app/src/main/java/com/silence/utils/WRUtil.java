@@ -17,7 +17,6 @@ public class WRUtil {
     private final static String PLAN_NAME = "plan.txt";
 
 
-
     public void writeFile(Context context, String content, RecordType type) {
         SDUtil sdUtil = new SDUtil(context);
         String fileName = "";
@@ -34,10 +33,14 @@ public class WRUtil {
                     break;
                 case CALENDAR:
                     fileName = CALENDAR_NAME;
+                    break;
+                case PLAN:
+                    fileName = PLAN_NAME;
+                    break;
             }
             if (type.equals(RecordType.CALENDAR)) {
                 sdUtil.appendFileToSD(fileName, content);
-             //   sdUtil.saveFileToSD(fileName, content);
+                //   sdUtil.saveFileToSD(fileName, content);
             } else {
                 sdUtil.saveFileToSD(fileName, content);
             }
@@ -45,7 +48,6 @@ public class WRUtil {
             ex.printStackTrace();
         }
     }
-
 
 
 }

@@ -6,5 +6,5 @@ package com.silence.enums;
  * @Version 1.0
  */
 public enum RecordType {
-    DAY, TODAY, CALENDAR, WORD
+    DAY, TODAY, CALENDAR, WORD, PLAN
 }
