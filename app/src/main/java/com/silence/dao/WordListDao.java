@@ -1,6 +1,8 @@
 package com.silence.dao;
 
 import android.content.Context;
+
+import com.silence.enums.Label;
 import com.silence.enums.RecordType;
 import com.silence.pojo.Trans;
 import com.silence.pojo.Word;
@@ -14,6 +16,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -94,6 +97,38 @@ public class WordListDao {
     public void updateWordList(Word word, Context context) {
         try {
             String resStr = "";
+            List<Label> currentLabel_label = word.getLabels();
+            List<String> currentLabel_string = new ArrayList<>();
+            for(Label l : currentLabel_label){
+                currentLabel_string.add(l.toString());
+            }
+            // 读取文件为list
+            SDUtil sdUtil = new SDUtil();
+            String wordlist_string = sdUtil.readFromSD(RecordType.WORD_LIST.getPath());
+            List<String> fileList = Arrays.asList(wordlist_string.split("\n"));
+            // get index
+            int currentIndex = word.getMid();
+            String currentWordJson_string = fileList.get(currentIndex);
+
+            //得到label，修改
+            JSONObject currentWordJson = new JSONObject(currentWordJson_string);
+            JSONArray labellist = currentWordJson.getJSONArray("label");
+            for (int i=0; i < currentLabel_string.size(); i++) {
+                labellist.put(currentLabel_string.get(i));
+            }
+            currentWordJson.put("label",labellist);
+            String word_after_change = currentWordJson.toString();
+            //得到List<String>
+            fileList.set(currentIndex, word_after_change);
+
+
+
+
+
+
+
+
+
             List<Word> wordList = listJsonWords(context);
             List<Word> resList = new ArrayList<>();
             for(Word tmp: wordList) {
@@ -111,6 +146,8 @@ public class WordListDao {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
