@@ -26,4 +26,6 @@ public interface Const {
     String PLAY_SPEED = "play_speed";
     String AUTO_SPEAK = "auto_speak";
     String[] META_KEYS = {WORDS_NMET, WORDS_CET4, WORDS_CET6, WORDS_IETSL, WORDS_GRE};
+
+
 }

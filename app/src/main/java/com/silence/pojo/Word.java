@@ -2,6 +2,8 @@ package com.silence.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 import com.silence.enums.Label;
 
 import java.util.ArrayList;
@@ -10,8 +12,14 @@ import java.util.List;
 public class Word implements Parcelable {
 
     private int mid;
+
+
     private String mkey;
+
+
     private List<Trans> mtranslist;
+
+
     private List<Label> labels;
 
     public Word(int mid, String mkey, List<Trans> mtranslist) {

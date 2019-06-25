@@ -30,6 +30,7 @@ import com.silence.adapter.WordPagerAdapter;
 //import com.silence.dao.UnitDao;
 import com.silence.dao.Utils;
 import com.silence.dao.WordDao;
+import com.silence.dao.WordListDao;
 import com.silence.fragment.DetailFgt;
 import com.silence.pojo.Word;
 import com.silence.pojo.Word;
@@ -167,6 +168,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        WordListDao wordListDao = new WordListDao();
         switch (v.getId()) {
             case R.id.btn_prev:
 //                if (mIsPlaying) {
@@ -185,6 +187,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 //TODO 把wordlist到SD卡
                 //TODO 写json util
                 //TODO 重写整个json
+
+                wordListDao.updateWordList(currentword, this);
                 break;
 //            case R.id.tv_play:
 //                if (mIsPlaying) {
@@ -209,7 +213,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 System.out.println("Known"); //TODO 需要把当前单词保存到熟悉的单词列表，文件JSON
                 //TODO 把wordlist到SD卡
                 //TODO 写json util
-                //TODO 重写整个json
+                //TODO 重写整个json\
+
+                wordListDao.updateWordList(currentword2, this);
                 break;
         }
     }
