@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.andraskindler.quickscroll.Scrollable;
+import com.silence.pojo.Trans;
 import com.silence.pojo.Word;
 import com.silence.pojo.WordLast;
 import com.silence.word.R;
@@ -48,13 +49,18 @@ public class WordAdapter extends BaseAdapter implements Scrollable {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_word, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.tvWord = (TextView) convertView.findViewById(R.id.tv_item_word);
-//            viewHolder.tvWordTrans = (TextView)convertView.findViewById(R.id.tv_item_word_trans);
+            viewHolder.tvWordTrans = (TextView) convertView.findViewById(R.id.tv_item_word_trans);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tvWord.setText(mWordList.get(position).getMkey());
-//        viewHolder.tvWordTrans.setText(mWordList.get(position).getTrans());
+        List<Trans> transList = mWordList.get(position).getMtranslist();
+        String explanation = "";
+        for (Trans tran : transList) {
+            explanation += tran.getKaofa().split("：")[0] + ";";
+        }
+        viewHolder.tvWordTrans.setText(explanation);
         return convertView;
     }
 
@@ -70,6 +76,6 @@ public class WordAdapter extends BaseAdapter implements Scrollable {
 
     static class ViewHolder {
         TextView tvWord;
-//        TextView tvWordTrans;
+        TextView tvWordTrans;
     }
 }

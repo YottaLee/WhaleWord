@@ -16,6 +16,7 @@ import com.silence.utils.DateUtils;
 import com.silence.word.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TransAdapter extends BaseAdapter implements Scrollable {
@@ -59,13 +60,36 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Trans trans = mTransList.get(position);
-        viewHolder.trans_kaofa.setText("考法："+String.valueOf(trans.getKaofa()));
+        String kaofa = trans.getKaofa();
+        List<String> kaofalist = Arrays.asList(kaofa.split("："));
+        String res_kaofa = "";
+        if(kaofalist != null && kaofalist.size() != 0){
+            if(kaofalist.size() == 1){
+                res_kaofa = kaofalist.get(0);
+            }
+            else {
+                for(int i = 0; i< kaofalist.size()-1; i++){
+                    res_kaofa += (kaofalist.get(i)+"\r\n");
+                }
+                res_kaofa += kaofalist.get(kaofalist.size()-1);
+            }
+            viewHolder.trans_kaofa.setText(res_kaofa);
+        }
+
+
         List<String>  eList =new ArrayList<>();
         eList = trans.getExampleSentences();
         String res = "";
-        if(eList != null){
-            for(String e: eList){
-                res+= (e+"\r\n");
+        if(eList != null && eList.size() != 0){
+
+            if(eList.size() == 1){
+                res = eList.get(0);
+            }
+            else {
+                for(int i = 0; i< eList.size()-1; i++){
+                    res += (eList.get(i)+"\r\n");
+                }
+                res += eList.get(eList.size()-1);
             }
             res = "例："+res;
             viewHolder.trans_example.setText(res);
@@ -75,20 +99,20 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             viewHolder.trans_synonym.setText("近："+trans.getSynonym());
         }
         else{
-            viewHolder.trans_synonym.setText(" ");
+            viewHolder.trans_synonym.setText("");
         }
         if(trans.getAntonym()!= null && !trans.getAntonym().isEmpty() && trans.getAntonym().length() != 0&& trans.getAntonym()!= "null" && trans.getAntonym()!= ""){
             viewHolder.trans_antonym.setText("反："+trans.getAntonym());
         }
         else{
-            viewHolder.trans_antonym.setText(" ");
+            viewHolder.trans_antonym.setText("");
         }
         if(trans.getDerivative()!= null && !trans.getDerivative().isEmpty()&& trans.getDerivative().length() != 0 && trans.getDerivative()!= "null" && trans.getDerivative()!= ""){
             viewHolder.trans_derivative.setText("派："+trans.getDerivative());
 //            System.out.println(3+"????"+trans.getDerivative());
         }
         else{
-            viewHolder.trans_derivative.setText(" ");
+            viewHolder.trans_derivative.setText("");
 //            System.out.println(3+"!!!!!");
         }
         return convertView;
