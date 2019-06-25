@@ -1,6 +1,7 @@
 package com.silence.fragment;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +24,20 @@ import com.silence.activity.DetailActivity;
 import com.silence.activity.PlanActivity;
 import com.silence.activity.WordListActivity;
 import com.silence.dao.CalendarDao;
+import com.silence.dao.WordDao;
+import com.silence.dao.WordListDao;
 import com.silence.enums.RecordType;
 import com.silence.utils.Const;
 import com.silence.utils.FileUtils;
 import com.silence.utils.SDUtil;
 import com.silence.utils.WRUtil;
 import com.silence.word.R;
+import org.json.JSONException;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -103,6 +111,18 @@ public class MainFragment extends Fragment {
 
         SDUtil sdUtil = new SDUtil(getContext());
         WRUtil wrUtil = new WRUtil();
+
+        System.out.println("-------------");
+        initWordList();
+
+        WordListDao wordListDao = new WordListDao();
+        try {
+            wordListDao.listJsonWords(getContext());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         /**
          * 这个try先执行一次，然后注释掉
          */
@@ -115,6 +135,8 @@ public class MainFragment extends Fragment {
 //            e.printStackTrace();
 //        }
         sdUtil.initFile();
+//        WordListDao wordListDao = new WordListDao();
+//        wordListDao.listWord();
 
 //        try {
 //            String res = sdUtil.readFromSD("calendar.txt");
@@ -162,4 +184,41 @@ public class MainFragment extends Fragment {
             }
         };
     }
+
+    public List<String> initWordList() {
+        Resources resources = this.getResources();
+        InputStream is;
+        List<String> wordList = new ArrayList<>();
+        try {
+            is = resources.openRawResource(R.raw.wordlist);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String line;
+            StringBuilder wordStr = new StringBuilder();
+            while ( (line = reader.readLine()) != null ) {
+                // System.out.println(line);
+//                wordList.add(line);
+                wordStr.append(line + "\n");
+            }
+            System.out.println("---------");
+//            System.out.println(wordList.size());
+
+//
+//            WRUtil wrUtil = new WRUtil();
+//            wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+//            SDUtil sdUtil = new SDUtil();
+//            String fileStr = sdUtil.readFromSD("wordlist.txt");
+//            String[] wordArr = fileStr.split("\n");
+//            System.out.println( "LEN: " + wordArr.length);
+
+
+
+          //  System.out.println(fileStr);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        return wordList;
+    }
+
+
 }
