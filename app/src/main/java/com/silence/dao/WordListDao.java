@@ -104,6 +104,8 @@ public class WordListDao {
                 }
             }
 
+// TODO
+
             WRUtil wrUtil = new WRUtil();
             wrUtil.writeFile(context, resStr, RecordType.WORD_LIST);
         } catch (UnsupportedEncodingException e) {

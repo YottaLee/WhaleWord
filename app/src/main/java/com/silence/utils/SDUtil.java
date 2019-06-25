@@ -40,6 +40,10 @@ public class SDUtil {
                 wrUtil.writeFile(context, "2019-06-21", RecordType.CALENDAR);
                 wrUtil.writeFile(context, "2019-06-22", RecordType.CALENDAR);
             }
+            String today = readFromSD(RecordType.TODAY.getPath());
+            if ( today == null || today.equals("") ) {
+                wrUtil.writeFile(context, "15", RecordType.TODAY);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
