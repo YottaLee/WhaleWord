@@ -280,6 +280,7 @@ public class CalendarFragment extends Fragment {
 
         CalendarDao calendarDao = new CalendarDao();
         String dates = calendarDao.listDay(year, month, context);
+        //System.out.println("dates: " + dates);
         String datesArr[] = dates.split(",");
         for(int i = 0;i < datesArr.length;i++){
             if(date_today.equals(datesArr[i])){
