@@ -41,6 +41,8 @@
         android:drawSelectorOnTop="false"
         android:overScrollMode="never"
         android:layout_below="@id/tv_phono"
+        android:dividerHeight="0dp"
+        android:divider="#ffffff"
         android:scrollbars="none" />
 
 

@@ -26,11 +26,9 @@ import com.silence.activity.WordListActivity;
 import com.silence.dao.CalendarDao;
 import com.silence.dao.WordDao;
 import com.silence.dao.WordListDao;
+import com.silence.dao.WordUtils;
 import com.silence.enums.RecordType;
-import com.silence.utils.Const;
-import com.silence.utils.FileUtils;
-import com.silence.utils.SDUtil;
-import com.silence.utils.WRUtil;
+import com.silence.utils.*;
 import com.silence.word.R;
 import org.json.JSONException;
 
@@ -60,7 +58,9 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String wordStr = FileUtils.readFile(getActivity(), "word");
+        WordUtils wutils = new WordUtils();
+
+        String wordStr = wutils.getWordSizeByLabel(Const.DIC_STUDIED, getContext()) + "";
 
         String wordCountStr = wordStr + "/3233";
         Pattern p = Pattern.compile("\\s*|\t|\r|\n");
@@ -74,12 +74,20 @@ public class MainFragment extends Fragment {
 
         wordCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), wordStr.length() - 1, wordCountStrSet.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+        SDUtil sdUtil = new SDUtil();
         View contentView = inflater.inflate(R.layout.main, null);
         TextView todayCount = (TextView) contentView.findViewById(R.id.today_count);
         todayCount.setText(FileUtils.readFile(getActivity(), "today"));
         todayCount.setTextSize(100);
 
-        String dayStr = FileUtils.readFile(getActivity(), "day");
+        WRUtil wrUtil = new WRUtil();
+//        wrUtil.writeFile(getContext(), "20", RecordType.DAY);
+        String dayStr = null;
+        try {
+            dayStr = sdUtil.readFromSD(RecordType.DAY.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         String dayCountStr = dayStr + "/180";
 
@@ -90,14 +98,20 @@ public class MainFragment extends Fragment {
         dayCountStrSet.setSpan(new ForegroundColorSpan(Color.WHITE), 0, dayCountStrSet.length() - 1,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        dayCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, dayStr.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        dayCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), dayStr.length() - 1, dayCountStrSet.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        dayCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, dayStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+        dayCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), dayStr.length(), dayCountStrSet.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String plan = "预计" + DateUtil.getMinutes() + "分钟";
+        TextView planCount = (TextView) contentView.findViewById(R.id.plan);
+        planCount.setText(plan);
 
         TextView dayCount = (TextView) contentView.findViewById(R.id.day_count);
         dayCount.setText(dayCountStrSet);
 
+        wrUtil = new WRUtil();
+//        wrUtil.writeFile(getContext(), "16", RecordType.TODAY);
         TextView wordCount = (TextView) contentView.findViewById(R.id.word_count);
         wordCount.setText(wordCountStrSet);
 
@@ -109,8 +123,9 @@ public class MainFragment extends Fragment {
         initListener();
         btn_xueci.setOnClickListener(listener);
 
-        SDUtil sdUtil = new SDUtil(getContext());
-        WRUtil wrUtil = new WRUtil();
+
+        sdUtil = new SDUtil(getContext());
+        wrUtil = new WRUtil();
 
         System.out.println("-------------");
         initWordList();
@@ -202,7 +217,7 @@ public class MainFragment extends Fragment {
             System.out.println("---------");
 //            System.out.println(wordList.size());
 
-//
+
 //            WRUtil wrUtil = new WRUtil();
 //            wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
 //            SDUtil sdUtil = new SDUtil();

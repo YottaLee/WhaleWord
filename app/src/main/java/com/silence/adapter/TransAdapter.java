@@ -75,6 +75,9 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             }
             viewHolder.trans_kaofa.setText(res_kaofa);
         }
+        else {
+            viewHolder.trans_kaofa.setHeight(0);
+        }
 
 
 
@@ -95,25 +98,28 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             res = "例："+res;
             viewHolder.trans_example.setText(res);
         }
+        else {
+            viewHolder.trans_example.setHeight(0);
+        }
 
         if(trans.getSynonym()!= null && !trans.getSynonym().isEmpty() && trans.getSynonym().length() !=0 && trans.getSynonym()!= "null" && trans.getSynonym()!= ""){
             viewHolder.trans_synonym.setText("近："+trans.getSynonym());
         }
         else{
-            viewHolder.trans_synonym.setText("");
+            viewHolder.trans_synonym.setHeight(0);
         }
         if(trans.getAntonym()!= null && !trans.getAntonym().isEmpty() && trans.getAntonym().length() != 0&& trans.getAntonym()!= "null" && trans.getAntonym()!= ""){
             viewHolder.trans_antonym.setText("反："+trans.getAntonym());
         }
         else{
-            viewHolder.trans_antonym.setText("");
+            viewHolder.trans_antonym.setHeight(0);
         }
         if(trans.getDerivative()!= null && !trans.getDerivative().isEmpty()&& trans.getDerivative().length() != 0 && trans.getDerivative()!= "null" && trans.getDerivative()!= ""){
             viewHolder.trans_derivative.setText("派："+trans.getDerivative());
 //            System.out.println(3+"????"+trans.getDerivative());
         }
         else{
-            viewHolder.trans_derivative.setText("");
+            viewHolder.trans_derivative.setHeight(1);
 //            System.out.println(3+"!!!!!");
         }
         return convertView;

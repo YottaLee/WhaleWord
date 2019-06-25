@@ -47,4 +47,15 @@ public class WordUtils {
         }
         return null;
     }
+
+    public int getWordSizeByLabel(String label, Context context) {
+        if (getWordByLabel(label, context) == null || getWordByLabel(label, context).size() == 0) {
+            return 0;
+        }
+        return getWordByLabel(label, context).size();
+    }
+
+
+
+
 }

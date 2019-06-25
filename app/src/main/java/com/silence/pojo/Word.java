@@ -13,13 +13,15 @@ public class Word implements Parcelable {
 
     private int mid;
 
-
+    @SerializedName("word")
     private String mkey;
 
 
+    @SerializedName("trans")
     private List<Trans> mtranslist;
 
 
+    @SerializedName("label")
     private List<Label> labels;
 
     public Word(int mid, String mkey, List<Trans> mtranslist) {
