@@ -3,6 +3,7 @@ package com.silence.signcalendar;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.*;
 import android.view.animation.Animation;
@@ -171,7 +172,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
     /** 
      * 填充日历(包含日期、标记、背景等) 
      */  
-    private void setCalendarDate() {  
+    private void setCalendarDate() {
         // 根据日历的日子获取这一天是星期几  
         int weekday = calendarday.getDay();  
         // 每个月第一天  
@@ -186,7 +187,8 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
 
         // 填充每一个空格  
         for (int i = 0; i < ROWS_TOTAL; i++) {  
-            for (int j = 0; j < COLS_TOTAL; j++) {  
+            for (int j = 0; j < COLS_TOTAL; j++) {
+
                 // 这个月第一天不是礼拜天,则需要绘制上个月的剩余几天  
                 if (i == 0 && j == 0 && weekday != 0) {  
                     int year = 0;  
@@ -255,7 +257,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                         // 当天  
                         if (thisday.getDate() == day && thisday.getMonth() == calendarday.getMonth()  
                                 && thisday.getYear() == calendarday.getYear()) {
-                             view.setText("今天");
+                            //view.setText("今天");
                             view.setTextColor(COLOR_TX_THIS_DAY);  
                             // view.setBackgroundResource(R.drawable.bg_sign_today);
                         } else if (thisday.getMonth() == calendarday.getMonth()  
@@ -300,7 +302,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                 }  
             }  
         }  
-    }  
+    }
 
     /** 
      * onClick接口回调 
@@ -602,6 +604,17 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
         if (marksMap.get(dates[i][j]) != null) {
             if (childCount < 2) {
 
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 5), (int) (tb * 5));
+                params.setMargins(0, 0, 1, 1);
+                params.addRule(RelativeLayout.CENTER_IN_PARENT);
+                ImageView markView = new ImageView(getContext());
+                markView.setImageResource(marksMap.get(dates[i][j]));
+                markView.setLayoutParams(params);
+                markView.setImageResource(R.drawable.icon_select_gray);  //标记图片 可自定义
+                group.addView(markView);
+
+                /*
+                //初版
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 2), (int) (tb * 2));
                 // params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);  
                 // params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);  
@@ -609,13 +622,12 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                 params.addRule(RelativeLayout.CENTER_IN_PARENT);
                 ImageView markView = new ImageView(getContext());
                 markView.setImageResource(marksMap.get(dates[i][j]));
-                markView.setLayoutParams(params);  
-
+                markView.setLayoutParams(params);
                 //标记图片 可自定义
                 //markView.setBackgroundResource(R.drawable.icon_select);  //i8live_signin
                 markView.setImageResource(R.drawable.icon_select_circle);
-
                 group.addView(markView);
+                */
             }  
         } else {
             if (childCount > 1) {  
@@ -631,26 +643,13 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
         if (marksMap.get(dates[i][j]) != null) {
             if (childCount < 2) {
 
-
-                //通过蓝色字体标记已签到日期
-                //System.out.println("text: " + dates[i][j].substring(8));
-                textview.setText(dates[i][j].substring(8));
-                textview.setTextColor(COLOR_TX_BLUE_SIGN_DAY);
-                //textview.setTextColor(Color.parseColor("#00ff00"));
+                //textview.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG );  //下划线
+                //textview.setTextColor(COLOR_TX_THIS_MONTH_DAY);
+                //textview.setTextColor(COLOR_TX_BLUE_SIGN_DAY);  //通过蓝色字体标记已签到日期
 
 
-
-
-                /*System.out.println("setMarker_context: " + getContext().toString());
-                System.out.println("text: " + dates[i][j].substring(8));
-                TextView textview = new TextView(getContext());
-                textview.setText(dates[i][j].substring(8));
-                textview.setTextColor(COLOR_TX_BLUE_SIGN_DAY);
-                group.addView(textview);*/
-                //
-
-
-                /*RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 2), (int) (tb * 2));
+                //RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 2), (int) (tb * 2));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 5), (int) (tb * 5));
                 // params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 // params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 params.setMargins(0, 0, 1, 1);
@@ -658,17 +657,11 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                 ImageView markView = new ImageView(getContext());
                 markView.setImageResource(marksMap.get(dates[i][j]));
                 markView.setLayoutParams(params);
-
                 //标记图片 可自定义
-                //markView.setBackgroundResource(R.drawable.icon_select);  //i8live_signin
-                markView.setImageResource(R.drawable.icon_select_circle);
-
+                markView.setBackgroundResource(R.drawable.icon_select_blue);  // 1) i8live_signin;2) icon_select_circle
+                //markView.setImageResource(R.drawable.);
                 group.addView(markView);
 
-
-                System.out.println("text: " + dates[i][j].substring(8));
-                textview.setText(dates[i][j].substring(8));
-                textview.setTextColor(COLOR_TX_THIS_MONTH_DAY);*/
 
             }
         } else {
