@@ -77,7 +77,7 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
         }
 
 
-        
+
         List<String>  eList =new ArrayList<>();
         eList = trans.getExampleSentences();
         String res = "";
