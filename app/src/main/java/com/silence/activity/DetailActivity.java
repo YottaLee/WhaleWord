@@ -27,7 +27,7 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 import com.silence.adapter.WordPagerAdapter;
-import com.silence.dao.UnitDao;
+//import com.silence.dao.UnitDao;
 import com.silence.dao.Utils;
 import com.silence.dao.WordDao;
 import com.silence.fragment.DetailFgt;
@@ -137,9 +137,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onStop() {
         super.onStop();
-        long readTime = System.currentTimeMillis() - mTime;
-        UnitDao unitDao = new UnitDao(this);
-        unitDao.updateTime(mMetaKey, mUnitKey, readTime);
+//        long readTime = System.currentTimeMillis() - mTime;
+//        UnitDao unitDao = new UnitDao(this);
+//        unitDao.updateTime(mMetaKey, mUnitKey, readTime);
         if (mIsPlaying) {
             mTimer.cancel();
         }
