@@ -56,6 +56,7 @@ public class Utils {
         List<String> JsonContext = new Utils().ReadFile(context);
 //        System.out.println(JsonContext.get(0));
 
+
         List<Word> wordList = new ArrayList<>();
         for(int j = 0; j<JsonContext.size(); j++){
             String s = JsonContext.get(j);
