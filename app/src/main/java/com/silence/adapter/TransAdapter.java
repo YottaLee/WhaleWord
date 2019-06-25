@@ -16,6 +16,7 @@ import com.silence.utils.DateUtils;
 import com.silence.word.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TransAdapter extends BaseAdapter implements Scrollable {
@@ -59,7 +60,23 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Trans trans = mTransList.get(position);
-        viewHolder.trans_kaofa.setText("考法："+String.valueOf(trans.getKaofa()));
+        String kaofa = trans.getKaofa();
+        List<String> kaofalist = Arrays.asList(kaofa.split("："));
+        String res_kaofa = "";
+        if(kaofalist != null && kaofalist.size() != 0){
+            if(kaofalist.size() == 1){
+                res_kaofa = kaofalist.get(0);
+            }
+            else {
+                for(int i = 0; i< kaofalist.size()-1; i++){
+                    res_kaofa += (kaofalist.get(i)+"\r\n");
+                }
+                res_kaofa += kaofalist.get(kaofalist.size()-1);
+            }
+            viewHolder.trans_kaofa.setText(res_kaofa);
+        }
+
+
         List<String>  eList =new ArrayList<>();
         eList = trans.getExampleSentences();
         String res = "";
