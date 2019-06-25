@@ -18,7 +18,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
     public static final int BEFORE_TODAY_BACKGROUND = Color.parseColor("#FFE4E4E4"); // 星期标题文字颜色
     public static final int COLOR_TX_THIS_MONTH_DAY = Color.parseColor("#000000"); // 当前月日历数字颜色
     public static final int COLOR_TX_OTHER_MONTH_DAY = Color.parseColor("#ff999999"); // 其他月日历数字颜色
-    public static final int COLOR_TX_THIS_DAY = Color.parseColor("#4192EC"); // 当天日历数字颜色#00ff00
+    public static final int COLOR_TX_THIS_DAY = Color.parseColor("#4192EC"); // 当天日历数字颜色#00ff00  #000000
     public static final int COLOR_TX_BLUE_SIGN_DAY = Color.parseColor("#4192EC"); //
     public static final int COLOR_BG_THIS_DAY = Color.parseColor("#ffcccccc"); // 当天日历背景颜色
     public static final int COLOR_BG_CALENDAR = Color.parseColor("#FFFFFF"); // 日历背景色
@@ -210,6 +210,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                         RelativeLayout group = getDateView(0, k);
                         group.setGravity(Gravity.TOP);
                         TextView view = null;
+
                         if (group.getChildCount() > 0) {  
                             view = (TextView) group.getChildAt(0);
                         } else {  
@@ -253,7 +254,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                         view.setText(Integer.toString(day));
                         // 当天  
                         if (thisday.getDate() == day && thisday.getMonth() == calendarday.getMonth()  
-                                && thisday.getYear() == calendarday.getYear()) {  
+                                && thisday.getYear() == calendarday.getYear()) {
                              view.setText("今天");
                             view.setTextColor(COLOR_TX_THIS_DAY);  
                             // view.setBackgroundResource(R.drawable.bg_sign_today);
@@ -271,8 +272,9 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                              view.setTextColor(Color.WHITE);
                              view.setBackgroundResource(dayBgColorMap.get(dates[i][j]));
                         }  
-                        // 设置标记  
-                        setMarker(group, i, j);  
+                        // 设置标记
+                        setMarkerThisMonth(group, i, j, view);
+                        //setMarker(group, i, j);
                         day++;  
                         // 下个月  
                     } else {  
@@ -600,13 +602,6 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
         if (marksMap.get(dates[i][j]) != null) {
             if (childCount < 2) {
 
-                /*System.out.println("setMarker_context: " + getContext().toString());
-                System.out.println("text: " + dates[i][j].substring(8));
-                TextView textview = new TextView(getContext());
-                textview.setText(dates[i][j].substring(8));
-                textview.setTextColor(COLOR_TX_BLUE_SIGN_DAY);
-                group.addView(textview);*/
-
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 2), (int) (tb * 2));
                 // params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);  
                 // params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);  
@@ -627,7 +622,62 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                 group.removeView(group.getChildAt(1));  
             }  
         }  
-    }  
+    }
+
+    // 设置标记_本月
+    private void setMarkerThisMonth(RelativeLayout group, int i, int j, TextView textview) {
+        int childCount = group.getChildCount();
+        // dates[i][j]=2015-12-20等为要对比的日期，marksMap中包括了dates[i][j]时就进入下面的if语句
+        if (marksMap.get(dates[i][j]) != null) {
+            if (childCount < 2) {
+
+
+                //通过蓝色字体标记已签到日期
+                //System.out.println("text: " + dates[i][j].substring(8));
+                textview.setText(dates[i][j].substring(8));
+                textview.setTextColor(COLOR_TX_BLUE_SIGN_DAY);
+                //textview.setTextColor(Color.parseColor("#00ff00"));
+
+
+
+
+                /*System.out.println("setMarker_context: " + getContext().toString());
+                System.out.println("text: " + dates[i][j].substring(8));
+                TextView textview = new TextView(getContext());
+                textview.setText(dates[i][j].substring(8));
+                textview.setTextColor(COLOR_TX_BLUE_SIGN_DAY);
+                group.addView(textview);*/
+                //
+
+
+                /*RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 2), (int) (tb * 2));
+                // params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                // params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                params.setMargins(0, 0, 1, 1);
+                params.addRule(RelativeLayout.CENTER_IN_PARENT);
+                ImageView markView = new ImageView(getContext());
+                markView.setImageResource(marksMap.get(dates[i][j]));
+                markView.setLayoutParams(params);
+
+                //标记图片 可自定义
+                //markView.setBackgroundResource(R.drawable.icon_select);  //i8live_signin
+                markView.setImageResource(R.drawable.icon_select_circle);
+
+                group.addView(markView);
+
+
+                System.out.println("text: " + dates[i][j].substring(8));
+                textview.setText(dates[i][j].substring(8));
+                textview.setTextColor(COLOR_TX_THIS_MONTH_DAY);*/
+
+            }
+        } else {
+            if (childCount > 1) {
+                group.removeView(group.getChildAt(1));
+            }
+        }
+    }
+
 
     /** 
      * 计算某年某月有多少天 
