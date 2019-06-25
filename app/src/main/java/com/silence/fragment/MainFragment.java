@@ -59,6 +59,7 @@ public class MainFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         WordUtils wutils = new WordUtils();
+
         String wordStr = wutils.getWordSizeByLabel(Const.DIC_STUDIED, getContext()) + "";
 
         String wordCountStr = wordStr + "/3233";
