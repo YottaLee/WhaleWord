@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">记词</string>
+    <string name="app_name">WhaleWord</string>
     <string name="iv_launch">launch background</string>
     <string name="iv_logo">main logo</string>
     <string name="iv_nmet">nmet button</string>
