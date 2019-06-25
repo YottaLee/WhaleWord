@@ -5,8 +5,10 @@ package com.silence.dao;
 //import com.google.gson.stream.JsonReader;
 import android.content.Context;
 
+import com.silence.enums.RecordType;
 import com.silence.pojo.Trans;
 import com.silence.pojo.Word;
+import com.silence.utils.SDUtil;
 import com.silence.word.R;
 
 
@@ -21,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
@@ -53,7 +56,15 @@ public class Utils {
     }
 
     public static List<Word> getJsonWords(Context context) throws UnsupportedEncodingException, JSONException {
-        List<String> JsonContext = new Utils().ReadFile(context);
+        SDUtil sdUtil = new SDUtil();
+        List<String> JsonContext = new ArrayList<>();
+        try {
+            String wordstring = sdUtil.readFromSD(RecordType.WORD_LIST.getPath());
+            JsonContext = Arrays.asList(wordstring.split("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 //        System.out.println(JsonContext.get(0));
 
         List<Word> wordList = new ArrayList<>();
