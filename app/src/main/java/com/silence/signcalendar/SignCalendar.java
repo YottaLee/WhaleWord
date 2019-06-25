@@ -618,7 +618,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
 
                 //标记图片 可自定义
                 //markView.setBackgroundResource(R.drawable.icon_select);  //i8live_signin
-                markView.setImageResource(R.drawable.icon_select_big);
+                markView.setImageResource(R.drawable.icon_select_circle);
 
                 group.addView(markView);
             }  
