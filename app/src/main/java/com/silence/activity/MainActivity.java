@@ -17,6 +17,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.bottom_navigation);
         mTabTl = (TabLayout) findViewById(R.id.tl_tab);
         mContentVp = (ViewPager) findViewById(R.id.vp_content);
-
         initContent();
         initTab();
 
