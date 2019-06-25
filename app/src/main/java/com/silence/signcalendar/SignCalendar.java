@@ -19,6 +19,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
     public static final int COLOR_TX_THIS_MONTH_DAY = Color.parseColor("#000000"); // 当前月日历数字颜色
     public static final int COLOR_TX_OTHER_MONTH_DAY = Color.parseColor("#ff999999"); // 其他月日历数字颜色
     public static final int COLOR_TX_THIS_DAY = Color.parseColor("#4192EC"); // 当天日历数字颜色#00ff00
+    public static final int COLOR_TX_BLUE_SIGN_DAY = Color.parseColor("#4192EC"); //
     public static final int COLOR_BG_THIS_DAY = Color.parseColor("#ffcccccc"); // 当天日历背景颜色
     public static final int COLOR_BG_CALENDAR = Color.parseColor("#FFFFFF"); // 日历背景色
 
@@ -258,7 +259,7 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
                             // view.setBackgroundResource(R.drawable.bg_sign_today);
                         } else if (thisday.getMonth() == calendarday.getMonth()  
                                 && thisday.getYear() == calendarday.getYear()) {  
-                            // 绘制本月的颜色  
+                            // 绘制本月的颜色
                             view.setTextColor(COLOR_TX_THIS_MONTH_DAY);  
                         } else {  
                             // 其他日期  
@@ -597,20 +598,29 @@ public class SignCalendar extends ViewFlipper implements GestureDetector.OnGestu
         int childCount = group.getChildCount();  
         // dates[i][j]=2015-12-20等为要对比的日期，marksMap中包括了dates[i][j]时就进入下面的if语句  
         if (marksMap.get(dates[i][j]) != null) {
-            if (childCount < 2) {  
+            if (childCount < 2) {
+
+                /*System.out.println("setMarker_context: " + getContext().toString());
+                System.out.println("text: " + dates[i][j].substring(8));
+                TextView textview = new TextView(getContext());
+                textview.setText(dates[i][j].substring(8));
+                textview.setTextColor(COLOR_TX_BLUE_SIGN_DAY);
+                group.addView(textview);*/
+
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (tb * 2), (int) (tb * 2));
                 // params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);  
                 // params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);  
                 params.setMargins(0, 0, 1, 1);  
                 params.addRule(RelativeLayout.CENTER_IN_PARENT);
                 ImageView markView = new ImageView(getContext());
-                markView.setImageResource(marksMap.get(dates[i][j]));  
+                markView.setImageResource(marksMap.get(dates[i][j]));
                 markView.setLayoutParams(params);  
 
                 //标记图片 可自定义
-                markView.setBackgroundResource(R.drawable.i8live_signin);
+                //markView.setBackgroundResource(R.drawable.icon_select);  //i8live_signin
+                markView.setImageResource(R.drawable.icon_select_big);
 
-                group.addView(markView);  
+                group.addView(markView);
             }  
         } else {
             if (childCount > 1) {  
