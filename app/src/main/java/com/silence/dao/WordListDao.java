@@ -105,7 +105,9 @@ public class WordListDao {
             // 读取文件为list
             SDUtil sdUtil = new SDUtil();
             String wordlist_string = sdUtil.readFromSD(RecordType.WORD_LIST.getPath());
-            List<String> fileList = Arrays.asList(wordlist_string.split("\n"));
+            List<String> fileList = new ArrayList<>();
+            fileList = Arrays.asList(wordlist_string.split("\n"));
+            System.out.println("wordlength: "+wordlist_string.length());
             // get index
             int currentIndex = word.getMid();
             String currentWordJson_string = fileList.get(currentIndex);
@@ -122,22 +124,32 @@ public class WordListDao {
             fileList.set(currentIndex, word_after_change);
 
 
-
-
-
-
-
-
-
-            List<Word> wordList = listJsonWords(context);
-            List<Word> resList = new ArrayList<>();
-            for(Word tmp: wordList) {
-                if (tmp.getMkey().equals(word.getMkey())) {
-                    resList.add(word);
-                } else {
-                    resList.add(tmp);
-                }
+            StringBuilder sb = new StringBuilder();
+            boolean first = true;
+            for (String item : fileList)
+            {
+                if (first)
+                    first = false;
+                else
+                    sb.append("\n");
+                sb.append(item);
             }
+            resStr = sb.toString();
+
+
+
+
+
+
+//            List<Word> wordList = listJsonWords(context);
+//            List<Word> resList = new ArrayList<>();
+//            for(Word tmp: wordList) {
+//                if (tmp.getMkey().equals(word.getMkey())) {
+//                    resList.add(word);
+//                } else {
+//                    resList.add(tmp);
+//                }
+//            }
 
 // TODO
 
