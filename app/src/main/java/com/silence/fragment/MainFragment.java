@@ -81,7 +81,7 @@ public class MainFragment extends Fragment {
         todayCount.setTextSize(100);
 
         WRUtil wrUtil = new WRUtil();
-//        wrUtil.writeFile(getContext(), "20", RecordType.DAY);
+        wrUtil.writeFile(getContext(), "20", RecordType.DAY);
         String dayStr = null;
         try {
             dayStr = sdUtil.readFromSD(RecordType.DAY.getPath());
@@ -218,12 +218,12 @@ public class MainFragment extends Fragment {
 //            System.out.println(wordList.size());
 
 
-//            WRUtil wrUtil = new WRUtil();
-//            wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
-//            SDUtil sdUtil = new SDUtil();
-//            String fileStr = sdUtil.readFromSD("wordlist.txt");
-//            String[] wordArr = fileStr.split("\n");
-//            System.out.println( "LEN: " + wordArr.length);
+            WRUtil wrUtil = new WRUtil();
+            wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+            SDUtil sdUtil = new SDUtil();
+            String fileStr = sdUtil.readFromSD("wordlist.txt");
+            String[] wordArr = fileStr.split("\n");
+            System.out.println( "LEN: " + wordArr.length);
 
 
 

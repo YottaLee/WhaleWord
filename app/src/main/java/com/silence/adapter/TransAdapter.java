@@ -63,7 +63,7 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
         String kaofa = trans.getKaofa();
         List<String> kaofalist = Arrays.asList(kaofa.split("："));
         String res_kaofa = "";
-        if(kaofalist != null && kaofalist.size() != 0){
+        if(kaofalist != null && kaofalist.size() != 0 && trans.getSynonym()!= "null"){
             if(kaofalist.size() == 1){
                 res_kaofa = kaofalist.get(0);
             }
@@ -102,7 +102,7 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
             viewHolder.trans_example.setHeight(0);
         }
 
-        if(trans.getSynonym()!= null && !trans.getSynonym().isEmpty() && trans.getSynonym().length() !=0 && trans.getSynonym()!= "null" && trans.getSynonym()!= ""){
+        if(trans.getSynonym()!= null && !trans.getSynonym().isEmpty() && trans.getSynonym().length() !=0 && trans.getSynonym()!= "null" &&trans.getSynonym()!= "null"&& trans.getSynonym()!= ""){
             viewHolder.trans_synonym.setText("近："+trans.getSynonym());
         }
         else{
