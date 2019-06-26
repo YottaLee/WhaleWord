@@ -83,7 +83,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         mMetaKey = intent.getStringExtra(Const.META_KEY);
         mUnitKey = intent.getIntExtra(Const.UNIT_KEY, 1);
-        mWordKey = intent.getIntExtra(Const.WORD_KEY, 1);
+        mWordKey = intent.getIntExtra(Const.WORD_KEY, 0);
 //        WordDao wordDao = new WordDao(this);
         Utils utils = new Utils();
         try {
