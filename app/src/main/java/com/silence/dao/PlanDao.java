@@ -21,6 +21,7 @@ public class PlanDao {
         String[] dateArr = new String[2];
         try {
             String dateStr = sdUtil.readFromSD(RecordType.PLAN.getPath());
+            System.out.println("DATESTR: " + dateStr);
             dateArr = dateStr.split(",");
         } catch (Exception ex) {
             ex.printStackTrace();

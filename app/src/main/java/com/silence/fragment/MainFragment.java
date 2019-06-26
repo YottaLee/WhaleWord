@@ -23,10 +23,7 @@ import com.silence.activity.CountActivity;
 import com.silence.activity.DetailActivity;
 import com.silence.activity.PlanActivity;
 import com.silence.activity.WordListActivity;
-import com.silence.dao.CalendarDao;
-import com.silence.dao.WordDao;
-import com.silence.dao.WordListDao;
-import com.silence.dao.WordUtils;
+import com.silence.dao.*;
 import com.silence.enums.RecordType;
 import com.silence.utils.*;
 import com.silence.word.R;
@@ -68,11 +65,11 @@ public class MainFragment extends Fragment {
         wordCountStr = m.replaceAll("");
         Spannable wordCountStrSet = new SpannableString(wordCountStr);
 
-        wordCountStrSet.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCountStrSet.length() - 1,
+        wordCountStrSet.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCountStrSet.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        wordCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, wordStr.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        wordCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, wordStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        wordCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), wordStr.length() - 1, wordCountStrSet.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        wordCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), wordStr.length(), wordCountStrSet.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         SDUtil sdUtil = new SDUtil();
         View contentView = inflater.inflate(R.layout.main, null);
@@ -89,8 +86,13 @@ public class MainFragment extends Fragment {
             e.printStackTrace();
         }
 
-        String dayCountStr = dayStr + "/180";
+        wrUtil.writeFile(getContext(), "2019-05-31,2019-07-31", RecordType.PLAN);
 
+        PlanDao planDao = new PlanDao();
+        String daysPlanStr = planDao.getDays() + "";
+//        System.out.println("DAYPLAN: " + daysPlanStr);
+        String dayCountStr = dayStr + "/" + daysPlanStr;
+//        System.out.println("DAYCNT: " + dayCountStr);
         m = p.matcher(dayCountStr);
         dayCountStr = m.replaceAll("");
 
