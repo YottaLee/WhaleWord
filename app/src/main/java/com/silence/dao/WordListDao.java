@@ -124,6 +124,7 @@ public class WordListDao {
             fileList.set(currentIndex, word_after_change);
 
 
+
             StringBuilder sb = new StringBuilder();
             boolean first = true;
             for (String item : fileList)
@@ -135,6 +136,8 @@ public class WordListDao {
                 sb.append(item);
             }
             resStr = sb.toString();
+
+            System.out.println("word json after: "+fileList.get(currentIndex));
 
 
 
@@ -155,6 +158,10 @@ public class WordListDao {
 
             WRUtil wrUtil = new WRUtil();
             wrUtil.writeFile(context, resStr, RecordType.WORD_LIST);
+            List<Word> wl = Utils.getJsonWords(context);
+            List<Label> llist = wl.get(currentIndex).getLabels();
+            System.out.println("llist"+llist);
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (JSONException e) {

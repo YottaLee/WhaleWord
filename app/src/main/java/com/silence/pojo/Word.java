@@ -45,11 +45,28 @@ public class Word implements Parcelable {
     /**
      * 掌握该单词
      */
-    public void handle(){
-        if(!labels.contains(Label.Studied))
+    public void handle() {
+        boolean isStudied = false, isHandled = false, isUnfamiliar = false;
+        for (Label label : labels)
+            if (label == Label.Studied) {
+                isStudied = true;
+                break;
+            }
+        if (!isStudied)
             labels.add(Label.Studied);
-        if(!labels.contains(Label.Handled)) {
-            if(labels.contains(Label.Unfamiliar))
+        for (Label label : labels)
+            if (label == Label.Handled) {
+                isHandled = true;
+                break;
+            }
+        for (Label label : labels)
+            if (label == Label.Unfamiliar) {
+                isUnfamiliar = true;
+                break;
+            }
+
+        if (!isHandled) {
+            if (isUnfamiliar)
                 labels.remove(Label.Unfamiliar);
             labels.add(Label.Handled);
         }
@@ -58,11 +75,28 @@ public class Word implements Parcelable {
     /**
      * 忘记该单词
      */
-    public void forget(){
-        if(!labels.contains(Label.Studied))
+    public void forget() {
+        boolean isStudied = false, isHandled = false, isUnfamiliar = false;
+        for (Label label : labels)
+            if (label == Label.Studied) {
+                isStudied = true;
+                break;
+            }
+        if (!isStudied)
             labels.add(Label.Studied);
-        if(!labels.contains(Label.Unfamiliar)) {
-            if(labels.contains(Label.Handled))
+        for (Label label : labels)
+            if (label == Label.Handled) {
+                isHandled = true;
+                break;
+            }
+        for (Label label : labels)
+            if (label == Label.Unfamiliar) {
+                isUnfamiliar = true;
+                break;
+            }
+
+        if (!isUnfamiliar) {
+            if (isHandled)
                 labels.remove(Label.Handled);
             labels.add(Label.Unfamiliar);
         }

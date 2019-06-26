@@ -5,9 +5,9 @@ public enum Label {
     Unfamiliar("生词"),
     Studied("已学词");
 
-    private String value;
+    public String value;
 
-    private Label(String value) {
+    Label(String value) {
         this.value = value;
     }
 

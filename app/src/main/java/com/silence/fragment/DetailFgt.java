@@ -62,7 +62,7 @@ public class DetailFgt extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_detail, container, false);
         TextView tvKey = (TextView) view.findViewById(R.id.tv_key);
-        TextView tvPhono = (TextView) view.findViewById(R.id.tv_phono);
+//        TextView tvPhono = (TextView) view.findViewById(R.id.tv_phono);
         ListView trans_list = (ListView)view.findViewById(R.id.trans_list);
         if(trans_list != null){
             System.out.println("1 not null");
@@ -82,7 +82,7 @@ public class DetailFgt extends Fragment{
         word = bundle.getParcelable(Const.WORD_KEY);
         tvKey.setText(String.valueOf(word.getMkey()));
         System.out.println("The word is :"+word.getMkey());
-        tvPhono.setText(String.valueOf("[,æbə'reiʃən]"));
+//        tvPhono.setText(String.valueOf("[,æbə'reiʃən]"));
         List<Trans> translist = new ArrayList<>();
         translist = word.getMtranslist();
         if(translist != null || translist.size() != 0){
@@ -92,6 +92,7 @@ public class DetailFgt extends Fragment{
             System.out.println("2 is null");
         }
 //        Context context = getContext();
+
         TransAdapter transAdapter = new TransAdapter(getActivity(), translist);
         trans_list.setAdapter(transAdapter);
         if(transAdapter != null ){

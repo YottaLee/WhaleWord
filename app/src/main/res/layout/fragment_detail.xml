@@ -18,17 +18,17 @@
         android:textStyle="bold"
         />
 
-    <TextView
-        android:id="@+id/tv_phono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/tv_key"
-        android:layout_alignStart="@id/tv_key"
-        android:layout_below="@id/tv_key"
-        android:layout_marginTop="8dp"
-        android:text="[,æbə'reiʃən]"
-        android:textColor="@color/color_word_other"
-        />
+<!--bold    <TextView-->
+        <!--android:id="@+id/tv_phono"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignLeft="@id/tv_key"-->
+        <!--android:layout_alignStart="@id/tv_key"-->
+        <!--android:layout_below="@id/tv_key"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="[,æbə'reiʃən]"-->
+        <!--android:textColor="@color/color_word_other"-->
+        <!--/>-->
 
 
     <ListView
@@ -40,7 +40,7 @@
         android:layout_marginRight="0dp"
         android:drawSelectorOnTop="false"
         android:overScrollMode="never"
-        android:layout_below="@id/tv_phono"
+        android:layout_below="@id/tv_key"
         android:dividerHeight="0dp"
         android:divider="#ffffff"
         android:scrollbars="none" />

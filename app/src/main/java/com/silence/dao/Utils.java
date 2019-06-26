@@ -5,6 +5,7 @@ package com.silence.dao;
 //import com.google.gson.stream.JsonReader;
 import android.content.Context;
 
+import com.silence.enums.Label;
 import com.silence.enums.RecordType;
 import com.silence.pojo.Trans;
 import com.silence.pojo.Word;
@@ -61,6 +62,8 @@ public class Utils {
         try {
             String wordstring = sdUtil.readFromSD(RecordType.WORD_LIST.getPath());
             JsonContext = Arrays.asList(wordstring.split("\n"));
+//            String res = JsonContext.get(1);
+//            System.out.println("After Write String: "+res);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,10 +78,32 @@ public class Utils {
             JSONObject dataJson = new JSONObject(s);
             JSONArray meaningList = dataJson.getJSONArray("trans");
             String wordtext = dataJson.getString("word");
+            JSONArray labels = dataJson.getJSONArray("label");
+            List<Label> labelarray= new ArrayList<>();
+            if(labels.length() != 0 ){
+                for(int i=0; i<labels.length();i++){
+                    String jo = labels.getString(i);
+                    Label temp = Label.Studied;
+                    switch (jo){
+                        case "已学词":
+                            temp = Label.Studied;
+                            break;
+                        case "生词":
+                            temp = Label.Unfamiliar;
+                            break;
+                        case "已掌握":
+                            temp = Label.Handled;
+                            break;
+                    }
+//                    Label temp = Label.valueOf(jo);
+                    labelarray.add(temp);
+                }
+            }
+            System.out.println("labelarray:"+labelarray.toString());
 
             List<Trans> transList = new ArrayList<>();
 
-            if (meaningList!=null || meaningList.length() != 0) {
+            if (meaningList!=null && meaningList.length() != 0) {
                 for (int i = 0; i < meaningList.length(); i++) {
                     JSONObject jsonObject = meaningList.getJSONObject(i);
                     if (jsonObject != null) {
@@ -109,7 +134,7 @@ public class Utils {
                 }
             }
 
-            Word word = new Word(j, wordtext, transList);
+            Word word = new Word(j, wordtext, transList, labelarray);
             wordList.add(word);
         }
         return wordList;

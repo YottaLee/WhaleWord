@@ -56,6 +56,7 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         WordUtils wutils = new WordUtils();
@@ -68,11 +69,11 @@ public class MainFragment extends Fragment {
         wordCountStr = m.replaceAll("");
         Spannable wordCountStrSet = new SpannableString(wordCountStr);
 
-        wordCountStrSet.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCountStrSet.length() - 1,
+        wordCountStrSet.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCountStrSet.length() ,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        wordCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, wordStr.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        wordCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, wordStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        wordCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), wordStr.length() - 1, wordCountStrSet.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        wordCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), wordStr.length() , wordCountStrSet.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         SDUtil sdUtil = new SDUtil();
         View contentView = inflater.inflate(R.layout.main, null);
@@ -82,6 +83,21 @@ public class MainFragment extends Fragment {
 
         WRUtil wrUtil = new WRUtil();
         wrUtil.writeFile(getContext(), "20", RecordType.DAY);
+        try {
+            sdUtil.saveFileToSD(RecordType.CALENDAR.getPath(), "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            sdUtil.saveFileToSD(RecordType.CALENDAR.getPath(), "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        wrUtil.writeFile(getContext(), "2019-06-20", RecordType.CALENDAR);
+        wrUtil.writeFile(getContext(), "2019-06-21", RecordType.CALENDAR);
+        wrUtil.writeFile(getContext(), "2019-06-22", RecordType.CALENDAR);
+        wrUtil.writeFile(getContext(), "2019-06-23", RecordType.CALENDAR);
+        wrUtil.writeFile(getContext(), "2019-06-24", RecordType.CALENDAR);
         String dayStr = null;
         try {
             dayStr = sdUtil.readFromSD(RecordType.DAY.getPath());
@@ -101,7 +117,7 @@ public class MainFragment extends Fragment {
 
         dayCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, dayStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        dayCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), dayStr.length(), dayCountStrSet.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        dayCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), dayStr.length(), dayCountStrSet.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         String plan = "预计" + DateUtil.getMinutes() + "分钟";
         TextView planCount = (TextView) contentView.findViewById(R.id.plan);
@@ -111,7 +127,7 @@ public class MainFragment extends Fragment {
         dayCount.setText(dayCountStrSet);
 
         wrUtil = new WRUtil();
-//        wrUtil.writeFile(getContext(), "16", RecordType.TODAY);
+        wrUtil.writeFile(getContext(), "16", RecordType.TODAY);
         TextView wordCount = (TextView) contentView.findViewById(R.id.word_count);
         wordCount.setText(wordCountStrSet);
 
@@ -142,38 +158,41 @@ public class MainFragment extends Fragment {
          * 这个try先执行一次，然后注释掉
          */
 
-//        try {
-//            sdUtil.saveFileToSD(RecordType.CALENDAR.getPath(),"");
-//            sdUtil.saveFileToSD(RecordType.WORD.getPath(),"");
-//        } catch (Exception e) {
-//            System.out.println("ERROR1");
-//            e.printStackTrace();
-//        }
+        try {
+            sdUtil.saveFileToSD(RecordType.CALENDAR.getPath(),"");
+            sdUtil.saveFileToSD(RecordType.WORD.getPath(),"");
+        } catch (Exception e) {
+            System.out.println("ERROR1");
+            e.printStackTrace();
+        }
         sdUtil.initFile();
-//        WordListDao wordListDao = new WordListDao();
-//        wordListDao.listWord();
+        wordListDao = new WordListDao();
+        wordListDao.listWord();
 
-//        try {
-//            String res = sdUtil.readFromSD("calendar.txt");
-//            System.out.println(res);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        System.out.println("**********");
-//        CalendarDao calendarDao = new CalendarDao();
+        try {
+            String res = sdUtil.readFromSD("calendar.txt");
+            System.out.println(res);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("**********");
+        CalendarDao calendarDao = new CalendarDao();
 //        String res = calendarDao.listDay("2019", "05", getContext());
-//        System.out.println(res);
-//        SDUtil sdUtil = new SDUtil(getContext());
-//        sdUtil.verifyStoragePermissions(getActivity());
-//        try {
-//            sdUtil.saveFileToSD("day.txt", "2");
-//            Thread.sleep(2000);
-//            String content = sdUtil.readFromSD("day.txt");
-//            System.out.println( "ccccccontent" + content);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
+ //       System.out.println(res);
+        sdUtil = new SDUtil(getContext());
+        sdUtil.verifyStoragePermissions(getActivity());
+        try {
+            sdUtil.saveFileToSD("day.txt", "2");
+            Thread.sleep(2000);
+            String content = sdUtil.readFromSD("day.txt");
+            System.out.println( "ccccccontent" + content);
+        } catch (Exception ex) {
+            ex.printStackTrace();
 //
-//        }
+        }
+
+       // wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+
         return contentView;
 
     }
@@ -219,11 +238,16 @@ public class MainFragment extends Fragment {
 
 
             WRUtil wrUtil = new WRUtil();
-            wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+
             SDUtil sdUtil = new SDUtil();
             String fileStr = sdUtil.readFromSD("wordlist.txt");
-            String[] wordArr = fileStr.split("\n");
-            System.out.println( "LEN: " + wordArr.length);
+            if ( fileStr == null || fileStr.isEmpty()) {
+                wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+                String[] wordArr = fileStr.split("\n");
+                System.out.println("LEN: " + wordArr.length);
+            } else {
+                System.out.println("WORDLIST FILE ALREADY EXIST...........");
+            }
 
 
 
@@ -234,6 +258,17 @@ public class MainFragment extends Fragment {
         }
         return wordList;
     }
+
+//    public void refresh() {
+//        onCreate(null);
+//    }
+
+
+//    @Override
+//    protected void onRestart() {
+//        super.o
+//    }
+//
 
 
 }
