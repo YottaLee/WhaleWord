@@ -129,4 +129,15 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
+
 }

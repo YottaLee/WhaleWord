@@ -31,6 +31,7 @@ import com.silence.adapter.WordPagerAdapter;
 import com.silence.dao.Utils;
 import com.silence.dao.WordDao;
 import com.silence.dao.WordListDao;
+import com.silence.dao.WordUtils;
 import com.silence.fragment.DetailFgt;
 import com.silence.pojo.Word;
 import com.silence.pojo.Word;
@@ -71,6 +72,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WordUtils wordUtils = new WordUtils();
+        System.out.println("STUDIED");
+        System.out.println(wordUtils.getWordSizeByLabel(Const.DIC_STUDIED, this));
         setContentView(R.layout.activity_detail);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -155,6 +159,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         mWordPagerAdapter = new WordPagerAdapter(getSupportFragmentManager(), mWordList);
         mViewPager.setAdapter(mWordPagerAdapter);
         mViewPager.setCurrentItem(mWordKey);
+
         mViewPager.addOnPageChangeListener(this);
     }
 
@@ -181,6 +186,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 //                    mWordKey--;
 //                }
 //                mViewPager.setCurrentItem(mWordKey);
+                if (mWordKey + 1 >= mWordList.size()) {
+                    Toast.makeText(this, R.string.last_page, Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    mWordKey++;
+                }
+                mViewPager.setCurrentItem(mWordKey);
                 Word currentword = mWordList.get(mWordKey);
                 currentword.forget();//改标签为陌生，currentword 是当前单词
                 System.out.println("forget");//TODO 需要把当前单词保存到陌生的单词列表，文件JSON
@@ -275,7 +287,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             e.printStackTrace();
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), R.string.toast_connect, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), R.string.toast_connect, Toast.LENGTH_SHORT).show();
                     }
                     item.setSpeakImg(R.mipmap.icon_speaker_off);
                 }
