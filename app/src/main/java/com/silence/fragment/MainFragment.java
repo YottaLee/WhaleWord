@@ -203,12 +203,12 @@ public class MainFragment extends Fragment {
 //            System.out.println(wordList.size());
 
 //
-            WRUtil wrUtil = new WRUtil();
-            wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
-            SDUtil sdUtil = new SDUtil();
-            String fileStr = sdUtil.readFromSD("wordlist.txt");
-            String[] wordArr = fileStr.split("\n");
-            System.out.println( "LEN: " + wordArr.length);
+//            WRUtil wrUtil = new WRUtil();
+//            wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+//            SDUtil sdUtil = new SDUtil();
+//            String fileStr = sdUtil.readFromSD("wordlist.txt");
+//            String[] wordArr = fileStr.split("\n");
+//            System.out.println( "LEN: " + wordArr.length);
 
 
 
