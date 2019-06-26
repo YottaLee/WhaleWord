@@ -241,7 +241,7 @@ public class MainFragment extends Fragment {
 
             SDUtil sdUtil = new SDUtil();
             String fileStr = sdUtil.readFromSD("wordlist.txt");
-            if (fileStr == null || fileStr.isEmpty()) {
+            if ( fileStr == null || fileStr.isEmpty()) {
                 wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
                 String[] wordArr = fileStr.split("\n");
                 System.out.println("LEN: " + wordArr.length);

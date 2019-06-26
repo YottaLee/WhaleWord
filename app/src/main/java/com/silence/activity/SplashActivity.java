@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
+import android.view.View;
+import android.widget.ImageView;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 import com.silence.utils.Const;
@@ -25,6 +27,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ImageView imageView = (ImageView) findViewById(R.id.start);
+        imageView.setVisibility(View.VISIBLE);
         SpeechUtility.createUtility(this, SpeechConstant.APPID + "=*****");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean exist = sharedPreferences.getBoolean(Const.SP_KEY, false);
