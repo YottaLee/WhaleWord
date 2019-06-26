@@ -101,10 +101,10 @@ public class DetailFgt extends Fragment{
         else {
             System.out.println("3 is null");
         }
-        quickScroll.init(QuickScroll.TYPE_POPUP_WITH_HANDLE, trans_list, transAdapter, QuickScroll.STYLE_HOLO);
-        quickScroll.setFixedSize(1);
-        quickScroll.setPopupColor(QuickScroll.BLUE_LIGHT, QuickScroll.BLUE_LIGHT_SEMITRANSPARENT, 1, Color.WHITE, 1);
-        quickScroll.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 42);
+//        quickScroll.init(QuickScroll.TYPE_POPUP_WITH_HANDLE, trans_list, transAdapter, QuickScroll.STYLE_HOLO);
+//        quickScroll.setFixedSize(1);
+//        quickScroll.setPopupColor(QuickScroll.BLUE_LIGHT, QuickScroll.BLUE_LIGHT_SEMITRANSPARENT, 1, Color.WHITE, 1);
+//        quickScroll.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 42);
         return view;
 
     }
