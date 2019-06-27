@@ -33,7 +33,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="我的签到"
+                android:text="我的打卡"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -90,7 +90,8 @@
             android:textSize="17sp" />
     </RelativeLayout>-->
 
-    <RelativeLayout
+    <!-- 签到提示layout -->
+    <!--<RelativeLayout
         android:id="@+id/rl_get_gift_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -165,6 +166,6 @@
                 android:textColor="#ffffff"
                 android:textSize="16sp" />
         </RelativeLayout>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </RelativeLayout>

@@ -118,4 +118,63 @@
         <!--android:textSize="14sp"-->
         <!--/>-->
 
+    <!-- 签到提示layout -->
+    <RelativeLayout
+            android:id="@+id/rl_get_gift_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#dd000000"
+            android:visibility="gone"
+            android:clickable="false">
+
+        <ImageView
+                android:id="@+id/iv_huode"
+                android:layout_width="229dp"
+                android:layout_height="59dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/i8live_wancheng" />
+
+        <RelativeLayout
+                android:id="@+id/rl_sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_huode"
+                android:layout_centerHorizontal="true">
+
+            <ImageView
+                    android:id="@+id/iv_sun_bg"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/signed_on_rotate_bg" />
+
+            <ImageView
+                    android:id="@+id/iv_sun"
+                    android:layout_width="98dp"
+                    android:layout_height="95dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/i8live_sun" />
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/rl_text_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_sun"
+                android:layout_marginTop="10dp">
+
+            <TextView
+                    android:id="@+id/tv_text_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="恭喜你已完成今日计划"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

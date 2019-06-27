@@ -153,7 +153,7 @@ public class CalendarFragment extends Fragment {
                 calendar.addMarks(list, 0);
 
                 //若检测到今天已打卡，则“可”弹出提示框（一次？）
-                if(isShown == false && isSign == true){
+                /*if(isShown == false && isSign == true){
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -171,7 +171,7 @@ public class CalendarFragment extends Fragment {
                 }
                 else if(isShown == true && isSign == false){
                     System.out.println("可能发生了错误的提示显示");
-                }
+                }*/
 
 
                 /*if (dataBean.getIsSign() == 1) {//1是已签到，0是未签到
