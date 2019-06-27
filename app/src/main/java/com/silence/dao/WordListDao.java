@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -135,15 +136,10 @@ public class WordListDao {
                     sb.append("\n");
                 sb.append(item);
             }
-            resStr = sb.toString();
+            resStr = URLEncoder.encode(sb.toString(), "Utf-8");
 
             System.out.println("word json after: "+fileList.get(currentIndex));
-
-
-
-
-
-
+            
 //            List<Word> wordList = listJsonWords(context);
 //            List<Word> resList = new ArrayList<>();
 //            for(Word tmp: wordList) {
@@ -158,9 +154,9 @@ public class WordListDao {
 
             WRUtil wrUtil = new WRUtil();
             wrUtil.writeFile(context, resStr, RecordType.WORD_LIST);
-            List<Word> wl = Utils.getJsonWords(context);
-            List<Label> llist = wl.get(currentIndex).getLabels();
-            System.out.println("llist"+llist);
+//            List<Word> wl = Utils.getJsonWords(context);
+//            List<Label> llist = wl.get(currentIndex).getLabels();
+//            System.out.println("llist"+llist);
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -61,19 +61,22 @@ public class TransAdapter extends BaseAdapter implements Scrollable {
         }
         Trans trans = mTransList.get(position);
         String kaofa = trans.getKaofa();
-        List<String> kaofalist = Arrays.asList(kaofa.split("："));
-        String res_kaofa = "";
-        if(kaofalist != null && kaofalist.size() != 0 && trans.getSynonym()!= "null"){
-            if(kaofalist.size() == 1){
-                res_kaofa = kaofalist.get(0);
-            }
-            else {
-                for(int i = 0; i< kaofalist.size()-1; i++){
-                    res_kaofa += (kaofalist.get(i)+"\r\n");
+
+        if(kaofa != "null"){
+            List<String> kaofalist = Arrays.asList(kaofa.split("："));
+            String res_kaofa = "";
+            if(kaofalist != null && kaofalist.size() != 0 ){
+                if(kaofalist.size() == 1){
+                    res_kaofa = kaofalist.get(0);
                 }
-                res_kaofa += kaofalist.get(kaofalist.size()-1);
+                else {
+                    for(int i = 0; i< kaofalist.size()-1; i++){
+                        res_kaofa += (kaofalist.get(i)+"\r\n");
+                    }
+                    res_kaofa += kaofalist.get(kaofalist.size()-1);
+                }
+                viewHolder.trans_kaofa.setText(res_kaofa);
             }
-            viewHolder.trans_kaofa.setText(res_kaofa);
         }
         else {
             viewHolder.trans_kaofa.setHeight(0);
