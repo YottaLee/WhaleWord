@@ -88,7 +88,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         studiedlist =  wordUtils.getWordByLabel("已学词",DetailActivity.this);
         int lastword = 0;
         if(studiedlist!= null&&studiedlist.size()!= 0){
-            lastword = studiedlist.get(studiedlist.size()).getMid();
+            lastword = mWordList.get(studiedlist.size()).getMid();
         }
         mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
 //        WordDao wordDao = new WordDao(this);
