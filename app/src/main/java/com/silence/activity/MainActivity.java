@@ -9,10 +9,7 @@ import android.os.Bundle;
 
 import android.os.Environment;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.*;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -129,15 +126,15 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-    }
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        Intent intent = getIntent();
+////        overridePendingTransition(0, 0);
+////        finish();
+////        overridePendingTransition(0, 0);
+//        startActivity(intent);
+//    }
 
 
 }
