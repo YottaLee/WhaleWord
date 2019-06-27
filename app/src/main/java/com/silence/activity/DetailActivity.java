@@ -99,7 +99,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         studiedlist =  wordUtils.getWordByLabel("已学词",DetailActivity.this);
         int lastword = 0;
         if(studiedlist!= null&&studiedlist.size()!= 0){
-            lastword = mWordList.get(studiedlist.size()).getMid();
+            System.out.println("进入判断");
+            lastword = studiedlist.get(studiedlist.size()-1).getMid();
+        }
+        else {
+            System.out.println("studiedlist is null");
         }
         mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
         mPlayHandler = new PlayHandler(this);
