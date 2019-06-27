@@ -95,7 +95,7 @@ public class MainFragment extends Fragment {
             System.out.println("WORDCNTSTR: " + wordCntStr);
         } else {
             System.out.println("UEQ");
-            wordCntStr = todoWordsCnt + "/" + allCntToday + "\n\n";
+            wordCntStr = todoWordsCnt + "/" + allCntToday + "\n";
             String[] resCntArr = wordCntStr.split("/");
             System.out.println("WORDCNTSTR: " + wordCntStr);
             cntSpan = new SpannableString(wordCntStr);
@@ -164,9 +164,10 @@ public class MainFragment extends Fragment {
         Button changePlan = (Button) contentView.findViewById(R.id.plan_change);
         initListener();
         changePlan.setOnClickListener(listener);
-
+        Button btn_review = (Button)contentView.findViewById(R.id.btnGetMp3s);
         Button btn_xueci = (Button) contentView.findViewById(R.id.btnExitSys);
         initListener();
+        btn_review.setOnClickListener(listener);
         btn_xueci.setOnClickListener(listener);
 
 
@@ -237,6 +238,10 @@ public class MainFragment extends Fragment {
                 switch (v.getId()) {
                     case R.id.plan_change:
                         intent.setClass(getActivity(), PlanActivity.class);
+                        break;
+                    case R.id.btnGetMp3s:
+                        intent.setClass(getActivity(), DetailActivity.class);
+                        intent.putExtra(Const.DIC_KEY, Const.DIC_UNFAMILIAR);
                         break;
                     case R.id.btnExitSys:
                         intent.setClass(getActivity(), DetailActivity.class);
