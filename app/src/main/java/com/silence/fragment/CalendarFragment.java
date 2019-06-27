@@ -194,14 +194,14 @@ public class CalendarFragment extends Fragment {
                 }
 
             }
-        });*/
+        });
 
         rlQuedingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rlGetGiftData.setVisibility(View.GONE);
             }
-        });
+        });*/
 
         /*signBack.setOnClickListener(new View.OnClickListener() {
             @Override
