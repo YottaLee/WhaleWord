@@ -23,10 +23,7 @@ import com.silence.activity.CountActivity;
 import com.silence.activity.DetailActivity;
 import com.silence.activity.PlanActivity;
 import com.silence.activity.WordListActivity;
-import com.silence.dao.CalendarDao;
-import com.silence.dao.WordDao;
-import com.silence.dao.WordListDao;
-import com.silence.dao.WordUtils;
+import com.silence.dao.*;
 import com.silence.enums.RecordType;
 import com.silence.utils.*;
 import com.silence.word.R;
@@ -59,6 +56,7 @@ public class MainFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
 
+
         WordUtils wutils = new WordUtils();
 
         String wordStr = wutils.getWordSizeByLabel(Const.DIC_STUDIED, getContext()) + "";
@@ -78,12 +76,40 @@ public class MainFragment extends Fragment {
         SDUtil sdUtil = new SDUtil();
         View contentView = inflater.inflate(R.layout.main, null);
         TextView todayCount = (TextView) contentView.findViewById(R.id.today_count);
-        try {
-            todayCount.setText(sdUtil.readFromSD(RecordType.TODAY.getPath())+"\n");
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+
+    //     int allCntToday = planDao.getSigWords();
+
+        PlanDao planDao = new PlanDao();
+
+        int todoWordsCnt = planDao.getToDoWords();
+        int allCntToday = planDao.getSigWords();
+        Spannable cntSpan = null;
+        String wordCntStr = "";
+        String resStr;
+        if (todoWordsCnt == allCntToday) {
+            System.out.println("EQ");
+            wordCntStr = allCntToday + "\n";
+            todayCount.setText(wordCntStr);
+            System.out.println("WORDCNTSTR: " + wordCntStr);
+        } else {
+            System.out.println("UEQ");
+            wordCntStr = todoWordsCnt + "/" + allCntToday + "\n\n";
+            String[] resCntArr = wordCntStr.split("/");
+            System.out.println("WORDCNTSTR: " + wordCntStr);
+            cntSpan = new SpannableString(wordCntStr);
+            cntSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCntStr.length() ,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            cntSpan.setSpan(new AbsoluteSizeSpan(100, true), 0, resCntArr[0].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            cntSpan.setSpan(new AbsoluteSizeSpan(40, true), resCntArr[0].length() , wordCntStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         }
-        todayCount.setTextSize(100);
+
+
+        todayCount.setText(cntSpan);
+
 
         WRUtil wrUtil = new WRUtil();
         wrUtil.writeFile(getContext(), "20", RecordType.DAY);

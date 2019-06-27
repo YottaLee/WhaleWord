@@ -42,10 +42,7 @@ import com.silence.enums.RecordType;
 import com.silence.fragment.DetailFgt;
 import com.silence.pojo.Word;
 import com.silence.pojo.Word;
-import com.silence.utils.Const;
-import com.silence.utils.FileUtils;
-import com.silence.utils.SDUtil;
-import com.silence.utils.WavWriter;
+import com.silence.utils.*;
 import com.silence.word.R;
 import org.json.JSONException;
 
@@ -320,6 +317,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 //TODO 把wordlist到SD卡
                 //TODO 写json util
                 //TODO 重写整个json\
+
+                WRUtil wrUtil = new WRUtil();
+                wrUtil.writeFile(this, countToday + "", RecordType.TODAY);
 
                 wordListDao.updateWordList(currentword2, this);
                 break;
