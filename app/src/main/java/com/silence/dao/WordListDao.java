@@ -139,7 +139,7 @@ public class WordListDao {
             resStr = URLEncoder.encode(sb.toString(), "Utf-8");
 
             System.out.println("word json after: "+fileList.get(currentIndex));
-            
+
 //            List<Word> wordList = listJsonWords(context);
 //            List<Word> resList = new ArrayList<>();
 //            for(Word tmp: wordList) {
