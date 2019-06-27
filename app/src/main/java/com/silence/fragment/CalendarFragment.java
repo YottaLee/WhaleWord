@@ -110,7 +110,7 @@ public class CalendarFragment extends Fragment {
         calendar = (SignCalendar) contentView.findViewById(R.id.sc_main);
         //btn_sign = (TextView) contentView.findViewById(R.id.btn_sign);
         tv_sign_year_month = (TextView) contentView.findViewById(R.id.tv_sign_year_month);
-        rlGetGiftData = (RelativeLayout) contentView.findViewById(R.id.rl_get_gift_view);
+        rlGetGiftData = (RelativeLayout) contentView.findViewById(R.id.rl_get_gift_view);  //弹出签到提示
         tvGetSunValue = (TextView) contentView.findViewById(R.id.tv_text_one);
         ivSun = (ImageView) contentView.findViewById(R.id.iv_sun);
         ivSunBg = (ImageView) contentView.findViewById(R.id.iv_sun_bg);
