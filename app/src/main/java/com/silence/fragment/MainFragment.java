@@ -78,7 +78,11 @@ public class MainFragment extends Fragment {
         SDUtil sdUtil = new SDUtil();
         View contentView = inflater.inflate(R.layout.main, null);
         TextView todayCount = (TextView) contentView.findViewById(R.id.today_count);
-        todayCount.setText(FileUtils.readFile(getActivity(), "today"));
+        try {
+            todayCount.setText(sdUtil.readFromSD(RecordType.TODAY.getPath())+"\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         todayCount.setTextSize(100);
 
         WRUtil wrUtil = new WRUtil();
