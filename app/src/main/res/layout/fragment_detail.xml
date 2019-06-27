@@ -118,7 +118,7 @@
         <!--android:textSize="14sp"-->
         <!--/>-->
 
-    <!-- 签到提示layout -->
+     <!--签到提示layout -->
     <RelativeLayout
             android:id="@+id/rl_get_gift_view"
             android:layout_width="match_parent"

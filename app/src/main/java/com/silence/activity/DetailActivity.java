@@ -19,6 +19,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,9 +73,18 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private SharedPreferences mSharedPreferences;
     private boolean mIsAutoSpeak;
 
+    private RelativeLayout rl;
+    private int countToday;
+    private int countPlan;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        countToday = 1;
+
         WordUtils wordUtils = new WordUtils();
 //        System.out.println("STUDIED");
 //        System.out.println(wordUtils.getWordSizeByLabel(Const.DIC_STUDIED, this));
@@ -103,7 +115,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             lastword = studiedlist.get(studiedlist.size()-1).getMid();
         }
         else {
-            System.out.println("studiedlist is null");
+//            System.out.println("studiedlist is null");
         }
         mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
         mPlayHandler = new PlayHandler(this);
@@ -162,16 +174,23 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+
+
+
     private void initViews() {
+
+
+
+
 //        tvPlay = (TextView) findViewById(R.id.tv_play);
 //        tvPlay.setOnClickListener(this);
         findViewById(R.id.btn_prev).setOnClickListener(this);
         findViewById(R.id.btn_next).setOnClickListener(this);
+
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mWordPagerAdapter = new WordPagerAdapter(getSupportFragmentManager(), mWordList);
         mViewPager.setAdapter(mWordPagerAdapter);
         mViewPager.setCurrentItem(mWordKey);
-
         mViewPager.addOnPageChangeListener(this);
     }
 
@@ -183,21 +202,18 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         mSynthesizer.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
     }
 
+
+    private boolean isfinishplan(){
+
+
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
         WordListDao wordListDao = new WordListDao();
         switch (v.getId()) {
             case R.id.btn_prev:
-//                if (mIsPlaying) {
-//                    pause();
-//                }
-//                if (mWordKey - 1 < 0) {
-//                    Toast.makeText(this, R.string.first_page, Toast.LENGTH_SHORT).show();
-//                    break;
-//                } else {
-//                    mWordKey--;
-//                }
-//                mViewPager.setCurrentItem(mWordKey);
                 if (mWordKey + 1 >= mWordList.size()) {
                     Toast.makeText(this, R.string.last_page, Toast.LENGTH_SHORT).show();
                     break;
@@ -230,10 +246,12 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 } else {
                     mWordKey++;
+                    countToday++;
                 }
                 mViewPager.setCurrentItem(mWordKey);
                 Word currentword2 = mWordList.get(mWordKey);
                 currentword2.handle();//该标签为熟悉，currentword2 是当前单词
+
                 System.out.println("Known"); //TODO 需要把当前单词保存到熟悉的单词列表，文件JSON
                 //TODO 把wordlist到SD卡
                 //TODO 写json util
