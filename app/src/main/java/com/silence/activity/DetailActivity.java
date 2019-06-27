@@ -73,8 +73,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WordUtils wordUtils = new WordUtils();
-        System.out.println("STUDIED");
-        System.out.println(wordUtils.getWordSizeByLabel(Const.DIC_STUDIED, this));
+//        System.out.println("STUDIED");
+//        System.out.println(wordUtils.getWordSizeByLabel(Const.DIC_STUDIED, this));
         setContentView(R.layout.activity_detail);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -83,7 +83,16 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         mMetaKey = intent.getStringExtra(Const.META_KEY);
         mUnitKey = intent.getIntExtra(Const.UNIT_KEY, 1);
-        mWordKey = intent.getIntExtra(Const.WORD_KEY, 0);
+
+        List<Word> studiedlist =  wordUtils.getWordByLabel("已学词",DetailActivity.this);
+        int lastword = 0;
+        if(studiedlist.size()!= 0){
+            lastword = studiedlist.get(studiedlist.size()-1).getMid();
+        }
+        else {
+            lastword = studiedlist.get(studiedlist.size()).getMid();
+        }
+        mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
 //        WordDao wordDao = new WordDao(this);
         Utils utils = new Utils();
         try {
