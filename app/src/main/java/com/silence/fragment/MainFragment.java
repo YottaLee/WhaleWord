@@ -243,15 +243,15 @@ public class MainFragment extends Fragment {
 
             WRUtil wrUtil = new WRUtil();
 
-//            SDUtil sdUtil = new SDUtil();
-//            String fileStr = sdUtil.readFromSD("wordlist.txt");
-//            if ( fileStr == null || fileStr.isEmpty()) {
-//                wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
-//                String[] wordArr = fileStr.split("\n");
-//                System.out.println("LEN: " + wordArr.length);
-//            } else {
-//                System.out.println("WORDLIST FILE ALREADY EXIST...........");
-//            }
+            SDUtil sdUtil = new SDUtil();
+            String fileStr = sdUtil.readFromSD("wordlist.txt");
+            if ( fileStr == null || fileStr.isEmpty()) {
+                wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+                String[] wordArr = fileStr.split("\n");
+                System.out.println("LEN: " + wordArr.length);
+            } else {
+                System.out.println("WORDLIST FILE ALREADY EXIST...........");
+            }
 
 
 
