@@ -84,13 +84,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         mMetaKey = intent.getStringExtra(Const.META_KEY);
         mUnitKey = intent.getIntExtra(Const.UNIT_KEY, 1);
-        List<Word> studiedlist = new ArrayList<>();
-        studiedlist =  wordUtils.getWordByLabel("已学词",DetailActivity.this);
-        int lastword = 0;
-        if(studiedlist!= null&&studiedlist.size()!= 0){
-            lastword = mWordList.get(studiedlist.size()).getMid();
-        }
-        mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
+
+
 //        WordDao wordDao = new WordDao(this);
         Utils utils = new Utils();
         try {
@@ -100,7 +95,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        List<Word> studiedlist = new ArrayList<>();
+        studiedlist =  wordUtils.getWordByLabel("已学词",DetailActivity.this);
+        int lastword = 0;
+        if(studiedlist!= null&&studiedlist.size()!= 0){
+            lastword = mWordList.get(studiedlist.size()).getMid();
+        }
+        mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
         mPlayHandler = new PlayHandler(this);
         initViews();
         initSpeech();
