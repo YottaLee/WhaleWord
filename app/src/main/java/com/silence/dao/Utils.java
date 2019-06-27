@@ -99,7 +99,7 @@ public class Utils {
                     labelarray.add(temp);
                 }
             }
-            System.out.println("labelarray:"+labelarray.toString());
+//            System.out.println("labelarray:"+labelarray.toString());
 
             List<Trans> transList = new ArrayList<>();
 

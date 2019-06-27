@@ -45,6 +45,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -84,15 +85,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         mMetaKey = intent.getStringExtra(Const.META_KEY);
         mUnitKey = intent.getIntExtra(Const.UNIT_KEY, 1);
 
-        List<Word> studiedlist =  wordUtils.getWordByLabel("已学词",DetailActivity.this);
-        int lastword = 0;
-        if(studiedlist.size()!= 0){
-            lastword = studiedlist.get(studiedlist.size()-1).getMid();
-        }
-        else {
-            lastword = studiedlist.get(studiedlist.size()).getMid();
-        }
-        mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
+
 //        WordDao wordDao = new WordDao(this);
         Utils utils = new Utils();
         try {
@@ -102,7 +95,17 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        List<Word> studiedlist = new ArrayList<>();
+        studiedlist =  wordUtils.getWordByLabel("已学词",DetailActivity.this);
+        int lastword = 0;
+        if(studiedlist!= null&&studiedlist.size()!= 0){
+            System.out.println("进入判断");
+            lastword = studiedlist.get(studiedlist.size()-1).getMid();
+        }
+        else {
+            System.out.println("studiedlist is null");
+        }
+        mWordKey = intent.getIntExtra(Const.WORD_KEY, lastword);
         mPlayHandler = new PlayHandler(this);
         initViews();
         initSpeech();
