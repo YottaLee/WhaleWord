@@ -77,14 +77,14 @@ public class DetailFgt extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_detail, container, false);
-
+        todaycount = 1;
         /* 签到提示
            初始化与layout相关的变量
         */
-        rlGetGiftData = (RelativeLayout) view.findViewById(R.id.rl_get_gift_view);  //弹出签到提示
-        tvGetSunValue = (TextView) view.findViewById(R.id.tv_text_one);
-        ivSun = (ImageView) view.findViewById(R.id.iv_sun);
-        ivSunBg = (ImageView) view.findViewById(R.id.iv_sun_bg);
+//        rlGetGiftData = (RelativeLayout) view.findViewById(R.id.rl_get_gift_view);  //弹出签到提示
+//        tvGetSunValue = (TextView) view.findViewById(R.id.tv_text_one);
+//        ivSun = (ImageView) view.findViewById(R.id.iv_sun);
+//        ivSunBg = (ImageView) view.findViewById(R.id.iv_sun_bg);
 
 
         TextView tvKey = (TextView) view.findViewById(R.id.tv_key);
@@ -128,9 +128,9 @@ public class DetailFgt extends Fragment{
         }
 
 
-        if(isfinishplan()){
-            signPrompt();
-        }
+//        if(isfinishplan()){
+//            signPrompt();
+//        }
 
 //        quickScroll.init(QuickScroll.TYPE_POPUP_WITH_HANDLE, trans_list, transAdapter, QuickScroll.STYLE_HOLO);
 //        quickScroll.setFixedSize(1);
@@ -140,11 +140,15 @@ public class DetailFgt extends Fragment{
 
     }
 
-    private boolean isfinishplan(){
-
-
-        return false;
-    }
+//    private boolean isfinishplan(){
+//        plancount = 3;
+//        if(plancount == todaycount){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//
+//    }
 
     public void setSpeakImg(int resId) {
         mImageView.setImageResource(resId);
@@ -160,33 +164,33 @@ public class DetailFgt extends Fragment{
         void speech(Word word);
     }
 
-    /**
-     *  签到提示
-     *  使用：调用 signPrompt()方法即可
-     */
-    //设置可见性，显示几秒后自动隐藏
-    public void signPrompt() {
-        showSignPrompt();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                rlGetGiftData.setVisibility(View.GONE);
-            }
-        }, 400);
-    }
-
-    //显示签到提示：会自动被signPrompt()方法调用
-    private void showSignPrompt(){
-
-        rlGetGiftData.setVisibility(View.VISIBLE);
-        String text = "恭喜你已完成今日计划";
-        ivSun.setImageResource(R.drawable.i8live_sun);
-        tvGetSunValue.setText(text);
-        Animation operatingAnim = AnimationUtils.loadAnimation(getContext().getApplicationContext(), R.anim.rotate_anim_online_gift);
-        LinearInterpolator lin = new LinearInterpolator();
-        operatingAnim.setInterpolator(lin);
-        ivSunBg.startAnimation(operatingAnim);
-    }
+//    /**
+//     *  签到提示
+//     *  使用：调用 signPrompt()方法即可
+//     */
+//    //设置可见性，显示几秒后自动隐藏
+//    public void signPrompt() {
+//        showSignPrompt();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                rlGetGiftData.setVisibility(View.GONE);
+//            }
+//        }, 400);
+//    }
+//
+//    //显示签到提示：会自动被signPrompt()方法调用
+//    private void showSignPrompt(){
+//
+//        rlGetGiftData.setVisibility(View.VISIBLE);
+//        String text = "恭喜你已完成今日计划";
+//        ivSun.setImageResource(R.drawable.i8live_sun);
+//        tvGetSunValue.setText(text);
+//        Animation operatingAnim = AnimationUtils.loadAnimation(getContext().getApplicationContext(), R.anim.rotate_anim_online_gift);
+//        LinearInterpolator lin = new LinearInterpolator();
+//        operatingAnim.setInterpolator(lin);
+//        ivSunBg.startAnimation(operatingAnim);
+//    }
 
 
 

@@ -20,6 +20,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,11 +38,13 @@ import com.silence.dao.Utils;
 import com.silence.dao.WordDao;
 import com.silence.dao.WordListDao;
 import com.silence.dao.WordUtils;
+import com.silence.enums.RecordType;
 import com.silence.fragment.DetailFgt;
 import com.silence.pojo.Word;
 import com.silence.pojo.Word;
 import com.silence.utils.Const;
 import com.silence.utils.FileUtils;
+import com.silence.utils.SDUtil;
 import com.silence.utils.WavWriter;
 import com.silence.word.R;
 import org.json.JSONException;
@@ -78,17 +83,42 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private int countPlan;
 
 
+    /* 签到提示
+   声明与layout相关的变量
+ */
+    private RelativeLayout rlGetGiftData;
+    private TextView tvGetSunValue;
+    private ImageView ivSun;
+    private ImageView ivSunBg;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        countToday = 1;
+        SDUtil sdUtil = new SDUtil();
+        countToday = 0;
+        try {
+            countPlan = Integer.parseInt(sdUtil.readFromSD(RecordType.TODAY.getPath()));
+            System.out.println("-----------------------------");
+            System.out.println("PLAN: "+countPlan);
+            System.out.println("-----------------------------");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
 
         WordUtils wordUtils = new WordUtils();
 //        System.out.println("STUDIED");
 //        System.out.println(wordUtils.getWordSizeByLabel(Const.DIC_STUDIED, this));
         setContentView(R.layout.activity_detail);
+
+        rlGetGiftData = (RelativeLayout) findViewById(R.id.rl_get_gift_view);  //弹出签到提示
+        tvGetSunValue = (TextView) findViewById(R.id.tv_text_one);
+        ivSun = (ImageView)findViewById(R.id.iv_sun);
+        ivSunBg = (ImageView)findViewById(R.id.iv_sun_bg);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -205,8 +235,39 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     private boolean isfinishplan(){
 
+        if(countToday == countPlan){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
-        return true;
+    /**
+     *  签到提示
+     *  使用：调用 signPrompt()方法即可
+     */
+    //设置可见性，显示几秒后自动隐藏
+    public void signPrompt() {
+        showSignPrompt();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rlGetGiftData.setVisibility(View.GONE);
+            }
+        }, 1500);
+    }
+
+    //显示签到提示：会自动被signPrompt()方法调用
+    private void showSignPrompt(){
+
+        rlGetGiftData.setVisibility(View.VISIBLE);
+        String text = "恭喜你已完成今日计划";
+        ivSun.setImageResource(R.drawable.i8live_sun);
+        tvGetSunValue.setText(text);
+        Animation operatingAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim_online_gift);
+        LinearInterpolator lin = new LinearInterpolator();
+        operatingAnim.setInterpolator(lin);
+        ivSunBg.startAnimation(operatingAnim);
     }
 
     @Override
@@ -251,6 +312,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 mViewPager.setCurrentItem(mWordKey);
                 Word currentword2 = mWordList.get(mWordKey);
                 currentword2.handle();//该标签为熟悉，currentword2 是当前单词
+                if(isfinishplan()){
+                    signPrompt();
+                }
 
                 System.out.println("Known"); //TODO 需要把当前单词保存到熟悉的单词列表，文件JSON
                 //TODO 把wordlist到SD卡
