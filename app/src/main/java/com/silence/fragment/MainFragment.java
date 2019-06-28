@@ -55,8 +55,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-
+//        WRUtil wrUtil2 = new WRUtil();
+//        wrUtil2.writeFile(getActivity(), "", RecordType.WORD_LIST);
         WordUtils wutils = new WordUtils();
 
         String wordStr = wutils.getWordSizeByLabel(Const.DIC_STUDIED, getContext()) + "";
@@ -67,19 +67,18 @@ public class MainFragment extends Fragment {
         wordCountStr = m.replaceAll("");
         Spannable wordCountStrSet = new SpannableString(wordCountStr);
 
-        wordCountStrSet.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCountStrSet.length() ,
+        wordCountStrSet.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCountStrSet.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         wordCountStrSet.setSpan(new AbsoluteSizeSpan(40, true), 0, wordStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        wordCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), wordStr.length() , wordCountStrSet.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        wordCountStrSet.setSpan(new AbsoluteSizeSpan(18, true), wordStr.length(), wordCountStrSet.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         SDUtil sdUtil = new SDUtil();
         View contentView = inflater.inflate(R.layout.main, null);
         TextView todayCount = (TextView) contentView.findViewById(R.id.today_count);
 
 
-
-    //     int allCntToday = planDao.getSigWords();
+        //     int allCntToday = planDao.getSigWords();
 
         PlanDao planDao = new PlanDao();
 
@@ -99,11 +98,11 @@ public class MainFragment extends Fragment {
             String[] resCntArr = wordCntStr.split("/");
             System.out.println("WORDCNTSTR: " + wordCntStr);
             cntSpan = new SpannableString(wordCntStr);
-            cntSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCntStr.length() ,
+            cntSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, wordCntStr.length(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             cntSpan.setSpan(new AbsoluteSizeSpan(100, true), 0, resCntArr[0].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            cntSpan.setSpan(new AbsoluteSizeSpan(40, true), resCntArr[0].length() , wordCntStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            cntSpan.setSpan(new AbsoluteSizeSpan(40, true), resCntArr[0].length(), wordCntStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         }
 
@@ -164,7 +163,7 @@ public class MainFragment extends Fragment {
         Button changePlan = (Button) contentView.findViewById(R.id.plan_change);
         initListener();
         changePlan.setOnClickListener(listener);
-        Button btn_review = (Button)contentView.findViewById(R.id.btnGetMp3s);
+        Button btn_review = (Button) contentView.findViewById(R.id.btnGetMp3s);
         Button btn_xueci = (Button) contentView.findViewById(R.id.btnExitSys);
         initListener();
         btn_review.setOnClickListener(listener);
@@ -190,8 +189,8 @@ public class MainFragment extends Fragment {
          */
 
         try {
-            sdUtil.saveFileToSD(RecordType.CALENDAR.getPath(),"");
-            sdUtil.saveFileToSD(RecordType.WORD.getPath(),"");
+            sdUtil.saveFileToSD(RecordType.CALENDAR.getPath(), "");
+            sdUtil.saveFileToSD(RecordType.WORD.getPath(), "");
         } catch (Exception e) {
             System.out.println("ERROR1");
             e.printStackTrace();
@@ -209,20 +208,20 @@ public class MainFragment extends Fragment {
         System.out.println("**********");
         CalendarDao calendarDao = new CalendarDao();
 //        String res = calendarDao.listDay("2019", "05", getContext());
- //       System.out.println(res);
+        //       System.out.println(res);
         sdUtil = new SDUtil(getContext());
         sdUtil.verifyStoragePermissions(getActivity());
         try {
             sdUtil.saveFileToSD("day.txt", "2");
             Thread.sleep(2000);
             String content = sdUtil.readFromSD("day.txt");
-            System.out.println( "ccccccontent" + content);
+            System.out.println("ccccccontent" + content);
         } catch (Exception ex) {
             ex.printStackTrace();
 //
         }
 
-       // wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
+        // wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
 
         return contentView;
 
@@ -263,7 +262,7 @@ public class MainFragment extends Fragment {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line;
             StringBuilder wordStr = new StringBuilder();
-            while ( (line = reader.readLine()) != null ) {
+            while ((line = reader.readLine()) != null) {
                 // System.out.println(line);
 //                wordList.add(line);
                 wordStr.append(line + "\n");
@@ -276,7 +275,7 @@ public class MainFragment extends Fragment {
 
             SDUtil sdUtil = new SDUtil();
             String fileStr = sdUtil.readFromSD("wordlist.txt");
-            if ( fileStr == null || fileStr.isEmpty()) {
+            if (fileStr == null || fileStr.isEmpty()) {
                 wrUtil.writeFile(getContext(), wordStr.toString(), RecordType.WORD_LIST);
                 String[] wordArr = fileStr.split("\n");
                 System.out.println("LEN: " + wordArr.length);
@@ -285,8 +284,7 @@ public class MainFragment extends Fragment {
             }
 
 
-
-          //  System.out.println(fileStr);
+            //  System.out.println(fileStr);
         } catch (Exception ex) {
             ex.printStackTrace();
 
